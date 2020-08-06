@@ -1,4 +1,4 @@
-package am.abm.abm.enities;
+package am.abm.abm.models.enities;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
