@@ -1,4 +1,4 @@
-package am.abm.abm.models.dtos;
+package am.abm.abm.models.dtos.user_dtos;
 
 import am.abm.abm.models.enities.User;
 

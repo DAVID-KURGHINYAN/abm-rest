@@ -1,4 +1,4 @@
-package am.abm.abm.models.dtos;
+package am.abm.abm.models.dtos.user_dtos;
 
 public class UserCreateDTO {
     private String address;
