@@ -30,16 +30,17 @@ public class UserController {
 
     @PutMapping("edit/{id}")
     public boolean editUser(@RequestBody UserCreateDTO user, @PathVariable Long id) {
-      return userService.editUser(user,id);
+        return userService.editUser(user, id);
     }
 
     @DeleteMapping("delete/{id}")
-    public void deleteUser (@PathVariable Long id) {
+    public void deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
     }
 
     @GetMapping("details/{id}")
-    public UserDetailsDTO details (@PathVariable Long id) {
+    public UserDetailsDTO details(@PathVariable Long id) {
         return userService.getUserDetails(id);
     }
 }
+

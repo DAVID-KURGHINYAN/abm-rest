@@ -7,8 +7,8 @@ import javax.persistence.Table;
 import java.sql.Date;
 
 @Entity
-@Table(name = "Orders")
-public class Order extends Base {
+@Table(name = "Orderses")
+public class Orders extends Base {
 
 
     private Date orderDate;
@@ -25,5 +25,5 @@ public class Order extends Base {
     @JoinColumn(name="shipper_Id", nullable = false)
     Shipper shipper;
 
-    public Order() {}
+    public Orders() {}
 }
