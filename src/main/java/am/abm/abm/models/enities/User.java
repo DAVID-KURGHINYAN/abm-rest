@@ -15,7 +15,7 @@ public class User extends Base {
     private String country;
 
     @OneToMany(mappedBy = "user")
-    private Set<Orders> orders;
+    private Set<Order> orders;
 
     public String getCustomerName() {
         return customerName;
@@ -65,11 +65,11 @@ public class User extends Base {
         this.country = country;
     }
 
-    public Set<Orders> getOrders() {
+    public Set<Order> getOrders() {
         return orders;
     }
 
-    public void setOrders(Set<Orders> orders) {
+    public void setOrders(Set<Order> orders) {
         this.orders = orders;
     }
 }

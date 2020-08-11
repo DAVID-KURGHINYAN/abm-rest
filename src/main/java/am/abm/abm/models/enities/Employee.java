@@ -14,7 +14,7 @@ public class Employee extends Base {
     private String notes;
 
     @OneToMany(mappedBy = "employee")
-    private Set<Orders> orders;
+    private Set<Order> orders;
 
     public String getLastName() {
         return lastName;
@@ -56,11 +56,11 @@ public class Employee extends Base {
         this.notes = notes;
     }
 
-    public Set<Orders> getOrders() {
+    public Set<Order> getOrders() {
         return orders;
     }
 
-    public void setOrders(Set<Orders> orders) {
+    public void setOrders(Set<Order> orders) {
         this.orders = orders;
     }
 

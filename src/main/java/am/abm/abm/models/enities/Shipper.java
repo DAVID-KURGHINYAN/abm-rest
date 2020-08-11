@@ -10,7 +10,7 @@ public class Shipper extends Base {
     private Long phone;
 
     @OneToMany(mappedBy="shipper")
-    private Set<Orders> orders;
+    private Set<Order> orders;
 
     public String getShipperName() {
         return shipperName;
@@ -28,11 +28,11 @@ public class Shipper extends Base {
         this.phone = phone;
     }
 
-    public Set<Orders> getOrders() {
+    public Set<Order> getOrders() {
         return orders;
     }
 
-    public void setOrders(Set<Orders> orders) {
+    public void setOrders(Set<Order> orders) {
         this.orders = orders;
     }
 

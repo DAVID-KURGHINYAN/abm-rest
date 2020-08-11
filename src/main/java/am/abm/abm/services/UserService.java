@@ -1,7 +1,7 @@
 package am.abm.abm.services;
 
-import am.abm.abm.models.dtos.user_dtos.UserCreateDTO;
-import am.abm.abm.models.dtos.user_dtos.UserDetailsDTO;
+import am.abm.abm.models.dtos.user.UserCreateDTO;
+import am.abm.abm.models.dtos.user.UserDetailsDTO;
 import am.abm.abm.models.enities.User;
 import am.abm.abm.repositories.UserRepository;
 import org.springframework.stereotype.Service;

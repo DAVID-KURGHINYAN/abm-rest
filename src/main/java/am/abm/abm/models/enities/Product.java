@@ -1,6 +1,7 @@
 package am.abm.abm.models.enities;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Product extends Base {
@@ -15,6 +16,17 @@ public class Product extends Base {
     @ManyToOne
     @JoinColumn(name="categoryId", nullable = false)
     Category category;
+
+    @OneToMany(mappedBy = "product")
+    private Set<OrderDetail> orderDetails;
+
+    public Set<OrderDetail> getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(Set<OrderDetail> orderDetails) {
+        this.orderDetails = orderDetails;
+    }
 
     public String getProductName() {
         return productName;
