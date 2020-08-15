@@ -67,4 +67,11 @@ public class OrderService {
         return null;
     }
 
+    public Order setShipperToOrder(Long orderId, Long shipperId) {
+        return null;
+    }
+
+    public Order setOrderDateToOrder(Long orderId, Long orderDateId) {
+            return null;
+    }
 }
