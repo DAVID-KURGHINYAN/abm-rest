@@ -8,5 +8,6 @@ import java.util.List;
 @Repository
 public interface EmployeeRepository extends BaseRepository<Employee> {
     List<Employee> findAllByLastNameAndFirstName(String lastName, String firstName);
+
     List<Employee> findAllByLastNameOrFirstName(String lastName, String firstName);
 }

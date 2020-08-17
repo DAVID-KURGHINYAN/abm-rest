@@ -64,5 +64,6 @@ public class Employee extends Base {
         this.orders = orders;
     }
 
-    public Employee() {}
+    public Employee() {
+    }
 }

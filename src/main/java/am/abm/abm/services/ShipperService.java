@@ -25,21 +25,25 @@ public class ShipperService {
         }
         return null;
     }
-    public List<Shipper> getAll(){return null;}
 
-    public Shipper saveShipper(ShipperCreateDTO shipperCreateDTO){
+    public List<Shipper> getAll() {
+        return null;
+    }
+
+    public Shipper saveShipper(ShipperCreateDTO shipperCreateDTO) {
         Shipper shipper = new Shipper();
         shipper.setShipperName(shipperCreateDTO.getShipperName());
         shipper.setPhone(shipperCreateDTO.getPhone());
         return shipperRepository.save(shipper);
     }
 
-    public void deleteShipper(Long id){
+    public void deleteShipper(Long id) {
         shipperRepository.deleteById(id);
     }
-    public boolean editShipper(ShipperCreateDTO shipper, Long id){
+
+    public boolean editShipper(ShipperCreateDTO shipper, Long id) {
         Optional<Shipper> optionalShipper = shipperRepository.findById(id);
-        if (optionalShipper.isPresent()){
+        if (optionalShipper.isPresent()) {
             Shipper oldShipper = optionalShipper.get();
             oldShipper.setShipperName(shipper.getShipperName());
             oldShipper.setPhone(shipper.getPhone());

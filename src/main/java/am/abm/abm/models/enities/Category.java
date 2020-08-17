@@ -10,10 +10,11 @@ public class Category extends Base {
     private String categoryName;
     private String description;
 
-    @OneToMany(mappedBy="category")
+    @OneToMany(mappedBy = "category")
     private Set<Product> products;
 
-    public Category(){}
+    public Category() {
+    }
 
     public String getCategoryName() {
         return categoryName;

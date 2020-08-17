@@ -13,32 +13,38 @@ import java.util.Optional;
 public class ProductService {
     private final ProductRepository productRepository;
 
-    public ProductService(ProductRepository productRepository){
-        this.productRepository=productRepository;
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
-    public ProductDetailsDTO getProductDetails(Long id){
+
+    public ProductDetailsDTO getProductDetails(Long id) {
         Optional<Product> optionalProduct = productRepository.findById(id);
-        if (optionalProduct.isPresent()){
+        if (optionalProduct.isPresent()) {
             Product product = optionalProduct.get();
             return new ProductDetailsDTO(product);
         }
         return null;
     }
-    public List<Product> getAll(){  //inchi hamara?
+
+    public List<Product> getAll() {  //inchi hamara?
         return null;
     }
-    public Product saveProduct(ProductCreateDTO productCreateDTO){
+
+    public Product saveProduct(ProductCreateDTO productCreateDTO) {
         Product product = new Product();
         product.setProductName(productCreateDTO.getProductName());
         product.setUnit(productCreateDTO.getUnit());
         product.setPrice(product.getPrice());
         return productRepository.save(product);
     }
-    public void deleteProduct(Long id){productRepository.deleteById(id);}
 
-    public boolean editProduct(ProductCreateDTO product, Long id){
+    public void deleteProduct(Long id) {
+        productRepository.deleteById(id);
+    }
+
+    public boolean editProduct(ProductCreateDTO product, Long id) {
         Optional<Product> optionalProduct = productRepository.findById(id);
-        if (optionalProduct.isPresent()){
+        if (optionalProduct.isPresent()) {
             Product oldProduct = optionalProduct.get();
             oldProduct.setProductName(product.getProductName());
             oldProduct.setUnit(product.getUnit());

@@ -10,11 +10,11 @@ public class Product extends Base {
     private int price;
 
     @ManyToOne
-    @JoinColumn(name="supplierId", nullable = false)
+    @JoinColumn(name = "supplierId", nullable = false)
     Supplier supplier;
 
     @ManyToOne
-    @JoinColumn(name="categoryId", nullable = false)
+    @JoinColumn(name = "categoryId", nullable = false)
     Category category;
 
     @OneToMany(mappedBy = "product")
@@ -68,5 +68,6 @@ public class Product extends Base {
         this.category = category;
     }
 
-    public Product(){}
+    public Product() {
+    }
 }

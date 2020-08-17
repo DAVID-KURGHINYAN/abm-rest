@@ -20,7 +20,7 @@ public class EmployeeService {
 
     public EmployeeDetailsDTO getEmployeeDetails(Long id) {
 
-        employeeRepository.findAllByLastNameAndFirstName("Vachik","");
+        employeeRepository.findAllByLastNameAndFirstName("Vachik", "");
 
         Optional<Employee> optionalEmployee = employeeRepository.findById(id);
         if (optionalEmployee.isPresent()) {

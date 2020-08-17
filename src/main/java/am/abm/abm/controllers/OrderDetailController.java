@@ -14,16 +14,21 @@ import java.util.List;
 @RequestMapping("orderDetail/")
 public class OrderDetailController {
     private final OrderDetailService orderDetailService;
-    public OrderDetailController(OrderDetailService orderDetailService){
-        this.orderDetailService=orderDetailService;
+
+    public OrderDetailController(OrderDetailService orderDetailService) {
+        this.orderDetailService = orderDetailService;
     }
+
     @GetMapping("list")
-    public List<OrderDetail> orderDetailList() {return orderDetailService.getAll();}
+    public List<OrderDetail> orderDetailList() {
+        return orderDetailService.getAll();
+    }
 
     @PostMapping("add")
-    public OrderDetail addOrderDetail(@RequestBody OrderDetailCreateDTO orderDetail){
+    public OrderDetail addOrderDetail(@RequestBody OrderDetailCreateDTO orderDetail) {
         return orderDetailService.saveOrderDetail(orderDetail);
     }
+
     @PutMapping("edit/{id}")
     public boolean editOrderDetail(@RequestBody OrderDetailCreateDTO orderDetail, @PathVariable Long id) {
         return orderDetailService.editOrderDetail(orderDetail, id);

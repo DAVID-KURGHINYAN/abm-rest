@@ -6,8 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CategoryRepository extends BaseRepository<Category>{
-
+public interface CategoryRepository extends BaseRepository<Category> {
 
 
 }

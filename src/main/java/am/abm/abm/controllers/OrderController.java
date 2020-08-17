@@ -24,13 +24,15 @@ public class OrderController {
     public Order setEmployeeToOrder(@PathVariable Long orderId, @PathVariable Long employeeId) {
         return orderService.setEmployeeToOrder(orderId, employeeId);
     }
+
     @PutMapping("addShipper/{orderId}/{shipperId}")
-    public Order setShipperToOrder(@PathVariable Long orderId, @PathVariable Long shipperId){
+    public Order setShipperToOrder(@PathVariable Long orderId, @PathVariable Long shipperId) {
         return orderService.setShipperToOrder(orderId, shipperId);
 
     }
+
     @PutMapping("addOrderDate/{orderId}/{orderDate}")
-    public Order setOrderDateToOrder(@PathVariable Long orderId, @PathVariable Long orderDateId){
+    public Order setOrderDateToOrder(@PathVariable Long orderId, @PathVariable Long orderDateId) {
         return orderService.setOrderDateToOrder(orderId, orderDateId);
     }
 

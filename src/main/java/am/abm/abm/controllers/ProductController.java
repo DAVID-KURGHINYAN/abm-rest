@@ -13,23 +13,33 @@ import java.util.List;
 @RequestMapping("product/")
 public class ProductController {
     private final ProductService productService;
-    public ProductController(ProductService productService ){
-        this.productService=productService; }
- @GetMapping("list")
- public List<Product> productList() {return productService.getAll();}
 
- @PostMapping("add")
-    public Product addProduct(@RequestBody ProductCreateDTO product) {return productService.saveProduct(product);}
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
+
+    @GetMapping("list")
+    public List<Product> productList() {
+        return productService.getAll();
+    }
+
+    @PostMapping("add")
+    public Product addProduct(@RequestBody ProductCreateDTO product) {
+        return productService.saveProduct(product);
+    }
 
     @PutMapping("edit/{id}")
-    public boolean editProduct(@RequestBody ProductCreateDTO product, @PathVariable Long id)
-    {return productService.editProduct(product,id);}
+    public boolean editProduct(@RequestBody ProductCreateDTO product, @PathVariable Long id) {
+        return productService.editProduct(product, id);
+    }
 
     @DeleteMapping("delete/{id}")
-    public void deleteProduct(@PathVariable Long id)
-    {productService.deleteProduct(id);}
+    public void deleteProduct(@PathVariable Long id) {
+        productService.deleteProduct(id);
+    }
 
     @GetMapping("details/{id}")
-  public ProductDetailsDTO details(@PathVariable Long id)
-  {return productService.getProductDetails(id);}
+    public ProductDetailsDTO details(@PathVariable Long id) {
+        return productService.getProductDetails(id);
+    }
 }

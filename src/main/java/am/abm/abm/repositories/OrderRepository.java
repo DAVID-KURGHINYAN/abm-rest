@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface OrderRepository extends BaseRepository<Order> {
     List<Order> findAllByEmployeeIsNotNull();
+
     List<Order> findAllByOrderDate(Date date);
 
 }

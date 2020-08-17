@@ -13,26 +13,32 @@ import java.util.List;
 public class EmployeeController {
     private final EmployeeService employeeService;
 
-    public EmployeeController(EmployeeService employeeService){
-        this.employeeService=employeeService;
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
+
     @GetMapping("list")
-    public List<Employee> employeeList(){ return employeeService.getAll();
+    public List<Employee> employeeList() {
+        return employeeService.getAll();
     }
+
     @PostMapping("add")
-    public Employee addEmployee(@RequestBody EmployeeCreateDTO employee){
+    public Employee addEmployee(@RequestBody EmployeeCreateDTO employee) {
         return employeeService.saveEmployee(employee);
     }
+
     @PutMapping("edit/{id}")
-    public boolean editEmployee(@RequestBody EmployeeCreateDTO employee, @PathVariable Long id){
+    public boolean editEmployee(@RequestBody EmployeeCreateDTO employee, @PathVariable Long id) {
         return employeeService.editEmployee(employee, id);
     }
+
     @DeleteMapping("delete/{id}")
-    public void deleteEmployee(@PathVariable Long id){
+    public void deleteEmployee(@PathVariable Long id) {
         employeeService.deleteEmployee(id);
     }
+
     @GetMapping("details/{id}")
-    public EmployeeDetailsDTO details(@PathVariable Long id){
+    public EmployeeDetailsDTO details(@PathVariable Long id) {
         return employeeService.getEmployeeDetails(id);
     }
 }

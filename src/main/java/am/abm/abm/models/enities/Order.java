@@ -11,15 +11,15 @@ public class Order extends Base {
     private Date orderDate;
 
     @ManyToOne
-    @JoinColumn(name="employee_Id", nullable = false)
+    @JoinColumn(name = "employee_Id", nullable = false)
     Employee employee;
 
     @ManyToOne
-    @JoinColumn(name="user_Id", nullable = false)
+    @JoinColumn(name = "user_Id", nullable = false)
     User user;
 
     @ManyToOne
-    @JoinColumn(name="shipper_Id", nullable = false)
+    @JoinColumn(name = "shipper_Id", nullable = false)
     Shipper shipper;
 
     @OneToMany(mappedBy = "order")
@@ -65,5 +65,6 @@ public class Order extends Base {
         this.orderDetails = orderDetails;
     }
 
-    public Order() {}
+    public Order() {
+    }
 }

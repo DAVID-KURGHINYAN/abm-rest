@@ -14,7 +14,7 @@ public class Supplier extends Base {
     private String country;
     private Long phone;
 
-    @OneToMany(mappedBy="supplier")
+    @OneToMany(mappedBy = "supplier")
     private Set<Product> products;
 
     public String getSupplierName() {
@@ -81,5 +81,6 @@ public class Supplier extends Base {
         this.products = products;
     }
 
-    public Supplier(){}
+    public Supplier() {
+    }
 }

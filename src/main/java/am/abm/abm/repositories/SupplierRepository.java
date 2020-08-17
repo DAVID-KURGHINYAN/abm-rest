@@ -4,5 +4,5 @@ import am.abm.abm.models.enities.Supplier;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface SupplierRepository extends BaseRepository<Supplier>{
+public interface SupplierRepository extends BaseRepository<Supplier> {
 }

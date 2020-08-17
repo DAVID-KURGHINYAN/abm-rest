@@ -22,8 +22,7 @@ public class UserDetailsDTO {
         this.customerName = customerName;
     }
 
-    public UserDetailsDTO(User user)
-    {
+    public UserDetailsDTO(User user) {
         id = user.getId();
         customerName = user.getCustomerName();
     }
