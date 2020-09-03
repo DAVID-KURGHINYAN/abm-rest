@@ -30,6 +30,7 @@ public class CategoryController {
     public void deleteCategory (@PathVariable Long id){
         categoryService.deleteCategory(id);
     }
+
     @GetMapping("details/{id}")
     public CategoryDetailsDTO details(@PathVariable Long id){
        return categoryService.getCategoryDetails(id);

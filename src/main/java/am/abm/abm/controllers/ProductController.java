@@ -3,6 +3,7 @@ package am.abm.abm.controllers;
 
 import am.abm.abm.models.dtos.product.ProductCreateDTO;
 import am.abm.abm.models.dtos.product.ProductDetailsDTO;
+import am.abm.abm.models.dtos.product.ProductPreviewDTO;
 import am.abm.abm.models.enities.Product;
 import am.abm.abm.services.ProductService;
 import org.springframework.web.bind.annotation.*;
@@ -24,14 +25,18 @@ public class ProductController {
     }
 
     @PostMapping("add")
-    public Product addProduct(@RequestBody ProductCreateDTO product) {
-
+    public ProductPreviewDTO addProduct(@RequestBody ProductCreateDTO product) {
         return productService.saveProduct(product);
     }
 
     @PutMapping("edit/{id}")
     public boolean editProduct(@RequestBody ProductCreateDTO product, @PathVariable Long id) {
         return productService.editProduct(product, id);
+    }
+
+    @PutMapping("change/{productId}{categoryId}")
+    public ProductPreviewDTO changeProductCategoryId(@PathVariable Long productId, @PathVariable Long categoryId) {
+        return productService.changeProductCategoryId(productId, categoryId);
     }
 
     @DeleteMapping("delete/{id}")
