@@ -53,7 +53,7 @@ public class ProductService {
         product.setSupplier(optionalSupplier.get());
         product.setProductName(productCreateDTO.getProductName());
         product.setUnit(productCreateDTO.getUnit());
-        product.setPrice(product.getPrice());
+        product.setPrice(productCreateDTO.getPrice());
 
         return new ProductPreviewDTO(productRepository.save(product));
     }

@@ -2,14 +2,12 @@ package am.abm.abm.services;
 
 import am.abm.abm.models.dtos.order.OrderCreateDTO;
 import am.abm.abm.models.dtos.order.OrderItemDTO;
+import am.abm.abm.models.dtos.order.OrderPreviewDTO;
 import am.abm.abm.models.enities.*;
 import am.abm.abm.repositories.*;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class OrderService {
@@ -18,18 +16,20 @@ public class OrderService {
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
     private final EmployeeRepository employeeRepository;
+    private final OrderDetailRepository orderDetailRepository;
 
     public OrderService(OrderRepository orderRepository,
                         ProductRepository productRepository,
                         UserRepository userRepository,
-                        EmployeeRepository employeeRepository) {
+                        EmployeeRepository employeeRepository, OrderDetailRepository orderDetailRepository) {
         this.orderRepository = orderRepository;
         this.productRepository = productRepository;
         this.userRepository = userRepository;
         this.employeeRepository = employeeRepository;
+        this.orderDetailRepository = orderDetailRepository;
     }
 
-    public Order saveOrder(OrderCreateDTO orderCreateDTO) {
+    public OrderPreviewDTO saveOrder(OrderCreateDTO orderCreateDTO) {
         List<OrderItemDTO> items = orderCreateDTO.getItems();
 
         if (items.size() > 0) {
@@ -44,10 +44,17 @@ public class OrderService {
 
             Optional<User> optionalUser = userRepository.findById(orderCreateDTO.getCustomerId());
             if (optionalUser.isPresent() && orderDetails.size() > 0) {
+
                 Order order = new Order();
-                order.setOrderDetails(orderDetails);
                 order.setUser(optionalUser.get());
-                return orderRepository.save(order);
+                order.setOrderDate(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
+                Order o = orderRepository.save(order);
+
+                for (OrderDetail orderDetail : orderDetails) {
+                    orderDetail.setOrder(o);
+                    orderDetailRepository.save(orderDetail);
+                }
+                return new OrderPreviewDTO(o);
             }
         }
         return null;

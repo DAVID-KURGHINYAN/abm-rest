@@ -53,6 +53,7 @@ public class ProductPreviewDTO {
     {
         this.setCategoryName(product.getCategory().getCategoryName());
         this.setSupplierName(product.getSupplier().getSupplierName());
+        this.setProductName(product.getProductName());
         this.setPrice(product.getPrice());
         this.setUnit(product.getUnit());
     }

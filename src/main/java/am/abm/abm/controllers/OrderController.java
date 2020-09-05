@@ -1,6 +1,7 @@
 package am.abm.abm.controllers;
 
 import am.abm.abm.models.dtos.order.OrderCreateDTO;
+import am.abm.abm.models.dtos.order.OrderPreviewDTO;
 import am.abm.abm.models.enities.Order;
 import am.abm.abm.services.OrderService;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ public class OrderController {
     }
 
     @PostMapping("add")
-    public Order addOrder(@RequestBody OrderCreateDTO orderCreateDTO) {
+    public OrderPreviewDTO addOrder(@RequestBody OrderCreateDTO orderCreateDTO) {
         return orderService.saveOrder(orderCreateDTO);
     }
 

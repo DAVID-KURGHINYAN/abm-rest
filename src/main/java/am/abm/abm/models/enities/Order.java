@@ -11,7 +11,7 @@ public class Order extends Base {
     private Date orderDate;
 
     @ManyToOne
-    @JoinColumn(name = "employee_Id", nullable = false)
+    @JoinColumn(name = "employee_Id")
     Employee employee;
 
     @ManyToOne
@@ -19,7 +19,7 @@ public class Order extends Base {
     User user;
 
     @ManyToOne
-    @JoinColumn(name = "shipper_Id", nullable = false)
+    @JoinColumn(name = "shipper_Id")
     Shipper shipper;
 
     @OneToMany(mappedBy = "order")
