@@ -8,6 +8,15 @@ public class ProductPreviewDTO {
     private int price;
     private String categoryName;
     private String supplierName;
+    private long id;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getProductName() {
         return productName;
@@ -56,5 +65,6 @@ public class ProductPreviewDTO {
         this.setProductName(product.getProductName());
         this.setPrice(product.getPrice());
         this.setUnit(product.getUnit());
+        this.setId(product.getId());
     }
 }

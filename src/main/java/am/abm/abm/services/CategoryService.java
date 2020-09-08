@@ -2,12 +2,14 @@ package am.abm.abm.services;
 
 import am.abm.abm.models.dtos.category.CategoryCreateDTO;
 import am.abm.abm.models.dtos.category.CategoryDetailsDTO;
+import am.abm.abm.models.dtos.category.CategoryPreviewDto;
 import am.abm.abm.models.enities.Category;
+import am.abm.abm.models.enities.OrderDetail;
+import am.abm.abm.models.enities.Product;
 import am.abm.abm.repositories.CategoryRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class CategoryService {
@@ -26,9 +28,18 @@ public class CategoryService {
         return null;
     }
 
-    public List<Category> getAll() {
-        return null;
+    public List<CategoryPreviewDto> getAll() {
+        List<Category> categories = categoryRepository.findAll();
+        List<CategoryPreviewDto> dtos = new ArrayList<>();
+
+
+        categories.forEach(item -> {
+            dtos.add(new CategoryPreviewDto(item));
+
+        });
+        return dtos;
     }
+
 
     public Category saveCategory(CategoryCreateDTO categoryCreateDTO) {
         Category category = new Category();

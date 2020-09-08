@@ -74,6 +74,7 @@ public class ProductService {
         }
         return false;
     }
+    
 
     public ProductPreviewDTO changeProductCategoryId(Long productId, Long categoryId) {  //news 03.09.2020
 

@@ -2,6 +2,7 @@ package am.abm.abm.controllers;
 
 import am.abm.abm.models.dtos.category.CategoryCreateDTO;
 import am.abm.abm.models.dtos.category.CategoryDetailsDTO;
+import am.abm.abm.models.dtos.category.CategoryPreviewDto;
 import am.abm.abm.models.enities.Category;
 import am.abm.abm.services.CategoryService;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
     @GetMapping("list")
-    public List<Category> categoryList(){return categoryService.getAll();
+    public List<CategoryPreviewDto> categoryList(){return categoryService.getAll();
     }
     @PostMapping("add")
     public Category addCategory(@RequestBody CategoryCreateDTO category){
