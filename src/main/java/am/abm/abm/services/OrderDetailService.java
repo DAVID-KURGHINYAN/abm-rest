@@ -1,12 +1,16 @@
 package am.abm.abm.services;
 
+import am.abm.abm.models.dtos.category.CategoryPreviewDto;
 import am.abm.abm.models.dtos.orderDetail.OrderDetailCreateDTO;
 import am.abm.abm.models.dtos.orderDetail.OrderDetailDetailsDTO;
+import am.abm.abm.models.dtos.orderDetail.OrderDetailPreviewDto;
+import am.abm.abm.models.enities.Category;
 import am.abm.abm.models.enities.OrderDetail;
 import am.abm.abm.models.enities.User;
 import am.abm.abm.repositories.OrderDetailRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,7 +32,13 @@ public class OrderDetailService {
     }
 
     public List<OrderDetail> getAll() {
-        return null;
+            List<OrderDetail> orderDetails = orderDetailRepository.findAll();
+            List<OrderDetailPreviewDto> dtos = new ArrayList<>();
+            orderDetails.forEach(item -> {
+                dtos.add(new OrderDetailPreviewDto(item));
+
+            });
+            return null;
     }
 
     public OrderDetail saveOrderDetail(OrderDetailCreateDTO orderDetailCreateDTO) {
@@ -51,4 +61,5 @@ public class OrderDetailService {
         }
         return false;
     }
+
 }
