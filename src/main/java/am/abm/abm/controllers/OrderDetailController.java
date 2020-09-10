@@ -1,5 +1,6 @@
 package am.abm.abm.controllers;
 
+import am.abm.abm.models.dtos.order.OrderDetailPreviewDTO;
 import am.abm.abm.models.dtos.orderDetail.OrderDetailCreateDTO;
 import am.abm.abm.models.dtos.orderDetail.OrderDetailDetailsDTO;
 import am.abm.abm.models.dtos.user.UserCreateDTO;
@@ -25,7 +26,7 @@ public class OrderDetailController {
     }
 
     @PostMapping("add")
-    public OrderDetail addOrderDetail(@RequestBody OrderDetailCreateDTO orderDetail) {
+    public OrderDetailPreviewDTO addOrderDetail(@RequestBody OrderDetailCreateDTO orderDetail) {
         return orderDetailService.saveOrderDetail(orderDetail);
     }
 

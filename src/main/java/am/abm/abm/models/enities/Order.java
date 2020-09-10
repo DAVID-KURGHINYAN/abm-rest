@@ -25,6 +25,8 @@ public class Order extends Base {
     @OneToMany(mappedBy = "order")
     private Set<OrderDetail> orderDetails;
 
+
+
     public Date getOrderDate() {
         return orderDate;
     }

@@ -8,6 +8,8 @@ import javax.persistence.ManyToOne;
 public class OrderDetail extends Base {
 
     private int quantity;
+    private Long productId;
+    private Long orderId;
 
     @ManyToOne
     @JoinColumn(name = "productId", nullable = false)
@@ -39,5 +41,21 @@ public class OrderDetail extends Base {
 
     public void setOrder(Order order) {
         this.order = order;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
+    public Long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
     }
 }
