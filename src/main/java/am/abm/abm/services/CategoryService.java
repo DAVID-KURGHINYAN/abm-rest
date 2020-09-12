@@ -10,6 +10,7 @@ import am.abm.abm.repositories.CategoryRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoryService {
@@ -30,22 +31,14 @@ public class CategoryService {
 
     public List<CategoryPreviewDto> getAll() {
         List<Category> categories = categoryRepository.findAll();
-        List<CategoryPreviewDto> dtos = new ArrayList<>();
-
-
-        categories.forEach(item -> {
-            dtos.add(new CategoryPreviewDto(item));
-
-        });
-        return dtos;
+        return categories.stream().map(CategoryPreviewDto::new).collect(Collectors.toList());
     }
 
-
-    public Category saveCategory(CategoryCreateDTO categoryCreateDTO) {
+    public CategoryPreviewDto saveCategory(CategoryCreateDTO categoryCreateDTO) {
         Category category = new Category();
         category.setCategoryName(categoryCreateDTO.getCategoryName());
         category.setDescription(categoryCreateDTO.getDescription());
-        return categoryRepository.save(category);
+        return new CategoryPreviewDto(categoryRepository.save(category));
     }
 
     public void deleteCategory(Long id) {

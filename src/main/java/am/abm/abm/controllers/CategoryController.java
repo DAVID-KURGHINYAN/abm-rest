@@ -20,7 +20,7 @@ public class CategoryController {
     public List<CategoryPreviewDto> categoryList(){return categoryService.getAll();
     }
     @PostMapping("add")
-    public Category addCategory(@RequestBody CategoryCreateDTO category){
+    public CategoryPreviewDto addCategory(@RequestBody CategoryCreateDTO category){
         return categoryService.saveCategory(category);
     }
     @PutMapping("edit/{id}")
