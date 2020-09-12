@@ -2,6 +2,7 @@ package am.abm.abm.controllers;
 
 import am.abm.abm.models.dtos.user.UserCreateDTO;
 import am.abm.abm.models.dtos.user.UserDetailsDTO;
+import am.abm.abm.models.dtos.user.UserPreviewDTO;
 import am.abm.abm.models.enities.User;
 import am.abm.abm.services.UserService;
 import org.springframework.web.bind.annotation.*;
@@ -19,12 +20,12 @@ public class UserController {
     }
 
     @GetMapping("list")
-    public List<User> userList() {
+    public List<UserPreviewDTO> userList() {
         return userService.getAll();
     }
 
     @PostMapping("add")
-    public User addUser(@RequestBody UserCreateDTO user) {
+    public UserPreviewDTO addUser(@RequestBody UserCreateDTO user) {
         return userService.saveUser(user);
     }
 
@@ -39,7 +40,7 @@ public class UserController {
     }
 
     @GetMapping("details/{id}")
-    public UserDetailsDTO details(@PathVariable Long id) {
+    public UserPreviewDTO details(@PathVariable Long id) {
         return userService.getUserDetails(id);
     }
 }

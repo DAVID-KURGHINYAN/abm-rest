@@ -2,6 +2,7 @@ package am.abm.abm.services;
 
 import am.abm.abm.models.dtos.shipper.ShipperCreateDTO;
 import am.abm.abm.models.dtos.shipper.ShipperDetailsDTO;
+import am.abm.abm.models.dtos.shipper.ShipperPreviewDTO;
 import am.abm.abm.models.enities.Shipper;
 import am.abm.abm.repositories.ShipperRepository;
 import org.springframework.stereotype.Service;
@@ -17,24 +18,24 @@ public class ShipperService {
         this.shipperRepository = shipperRepository;
     }
 
-    public ShipperDetailsDTO getShipperDetails(Long id) {
+    public ShipperPreviewDTO getShipperDetails(Long id) {
         Optional<Shipper> optionalShipper = shipperRepository.findById(id);
         if (optionalShipper.isPresent()) {
             Shipper shipper = optionalShipper.get();
-            return new ShipperDetailsDTO(shipper);
+            return new ShipperPreviewDTO(shipper);
         }
         return null;
     }
 
-    public List<Shipper> getAll() {
-        return null;
+    public List<ShipperPreviewDTO> getAll() {
+        return ShipperPreviewDTO.getShipperPreviewDTOS(shipperRepository.findAll());
     }
 
-    public Shipper saveShipper(ShipperCreateDTO shipperCreateDTO) {
+    public ShipperPreviewDTO saveShipper(ShipperCreateDTO shipperCreateDTO) {
         Shipper shipper = new Shipper();
         shipper.setShipperName(shipperCreateDTO.getShipperName());
         shipper.setPhone(shipperCreateDTO.getPhone());
-        return shipperRepository.save(shipper);
+        return new ShipperPreviewDTO(shipperRepository.save(shipper));
     }
 
     public void deleteShipper(Long id) {

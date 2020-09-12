@@ -2,6 +2,7 @@ package am.abm.abm.controllers;
 
 import am.abm.abm.models.dtos.shipper.ShipperCreateDTO;
 import am.abm.abm.models.dtos.shipper.ShipperDetailsDTO;
+import am.abm.abm.models.dtos.shipper.ShipperPreviewDTO;
 import am.abm.abm.models.dtos.user.UserDetailsDTO;
 import am.abm.abm.models.enities.Shipper;
 import am.abm.abm.services.ShipperService;
@@ -19,12 +20,12 @@ public class ShipperController {
     }
 
     @GetMapping("list")
-    public List<Shipper> shipperList() {
+    public List<ShipperPreviewDTO> shipperList() {
         return shipperService.getAll();
     }
 
     @PostMapping("add")
-    public Shipper addShipper(@RequestBody ShipperCreateDTO shipper) {
+    public ShipperPreviewDTO addShipper(@RequestBody ShipperCreateDTO shipper) {
         return shipperService.saveShipper(shipper);
     }
 
@@ -39,7 +40,7 @@ public class ShipperController {
     }
 
     @GetMapping("details/{id}")
-    public ShipperDetailsDTO details(@PathVariable Long id) {
+    public ShipperPreviewDTO details(@PathVariable Long id) {
         return shipperService.getShipperDetails(id);
     }
 }
