@@ -24,6 +24,6 @@ public class OrderDetailPreviewDTO {
 
     public OrderDetailPreviewDTO(OrderDetail orderDetail){
         setOrderDetailId(orderDetail.getId());
-        setOrderId(orderDetail.getOrderId());
+        setOrderId(orderDetail.getOrder().getId());
     }
 }
