@@ -7,12 +7,12 @@ import java.util.stream.Collectors;
 
 public class ShipperPreviewDTO {
     private Long shipperId;
-    private int orderCount;
+    private int ordersCount;
     private String fullName;
 
     public ShipperPreviewDTO(Shipper shipper) {
         setShipperId(shipper.getId());
-        setOrderCount(shipper.getOrders().size());
+        setOrdersCount(shipper.getOrders().size());
         setFullName(shipper.getShipperName());
     }
 
@@ -24,12 +24,12 @@ public class ShipperPreviewDTO {
         this.shipperId = shipperId;
     }
 
-    public int getOrderCount() {
-        return orderCount;
+    public int getOrdersCount() {
+        return ordersCount;
     }
 
-    public void setOrderCount(int orderCount) {
-        this.orderCount = orderCount;
+    public void setOrdersCount(int orderCount) {
+        this.ordersCount = orderCount;
     }
 
     public String getFullName() {
@@ -39,6 +39,7 @@ public class ShipperPreviewDTO {
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
+
     public static List<ShipperPreviewDTO> getShipperPreviewDTOS(List<Shipper> shippers){
         return shippers.stream().map(ShipperPreviewDTO::new).collect(Collectors.toList());
     }

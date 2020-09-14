@@ -2,6 +2,7 @@ package am.abm.abm.models.enities;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import java.util.Collection;
 import java.util.Set;
 
 @Entity

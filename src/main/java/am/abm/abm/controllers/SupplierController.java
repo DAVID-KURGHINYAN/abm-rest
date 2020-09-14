@@ -2,6 +2,7 @@ package am.abm.abm.controllers;
 
 import am.abm.abm.models.dtos.supplier.SupplierCreateDTO;
 import am.abm.abm.models.dtos.supplier.SupplierDetailsDTO;
+import am.abm.abm.models.dtos.supplier.SupplierPreviewDTO;
 import am.abm.abm.models.enities.Supplier;
 import am.abm.abm.services.SupplierService;
 import org.springframework.web.bind.annotation.*;
@@ -18,12 +19,12 @@ public class SupplierController {
     }
 
     @GetMapping("list")
-    public List<Supplier> supplierList() {
+    public List<SupplierPreviewDTO> supplierList() {
         return supplierService.getAll();
     }
 
     @PostMapping("add")
-    public Supplier addSupplier(@RequestBody SupplierCreateDTO supplier) {
+    public SupplierPreviewDTO addSupplier(@RequestBody SupplierCreateDTO supplier) {
         return supplierService.saveSupplier(supplier);
     }
 
@@ -38,7 +39,7 @@ public class SupplierController {
     }
 
     @GetMapping("details/{id}")
-    public SupplierDetailsDTO details(@PathVariable Long id) {
+    public SupplierPreviewDTO details(@PathVariable Long id) {
         return supplierService.getSupplierDetails(id);
     }
 }

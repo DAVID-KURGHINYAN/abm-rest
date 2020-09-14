@@ -2,6 +2,7 @@ package am.abm.abm.services;
 
 import am.abm.abm.models.dtos.supplier.SupplierCreateDTO;
 import am.abm.abm.models.dtos.supplier.SupplierDetailsDTO;
+import am.abm.abm.models.dtos.supplier.SupplierPreviewDTO;
 import am.abm.abm.models.enities.Supplier;
 import am.abm.abm.repositories.SupplierRepository;
 import org.springframework.stereotype.Service;
@@ -17,20 +18,20 @@ public class SupplierService {
         this.supplierRepository = supplierRepository;
     }
 
-    public SupplierDetailsDTO getSupplierDetails(Long id) {
+    public SupplierPreviewDTO getSupplierDetails(Long id) {
         Optional<Supplier> optionalSupplier = supplierRepository.findById(id);
         if (optionalSupplier.isPresent()) {
             Supplier supplier = optionalSupplier.get();
-            return new SupplierDetailsDTO(supplier);
+            return new SupplierPreviewDTO(supplier);
         }
         return null;
     }
 
-    public List<Supplier> getAll() {
-        return null;
+    public List<SupplierPreviewDTO> getAll() {
+        return SupplierPreviewDTO.supplierPreviewDTOS(supplierRepository.findAll());
     }
 
-    public Supplier saveSupplier(SupplierCreateDTO supplierCreateDTO) {
+    public SupplierPreviewDTO saveSupplier(SupplierCreateDTO supplierCreateDTO) {
         Supplier supplier = new Supplier();
         supplier.setSupplierName(supplierCreateDTO.getSupplierName());
         supplier.setContactName(supplierCreateDTO.getContactName());
@@ -39,7 +40,7 @@ public class SupplierService {
         supplier.setPostalCode(supplierCreateDTO.getPostalCode());
         supplier.setCountry(supplierCreateDTO.getCountry());
         supplier.setPhone(supplierCreateDTO.getPhone());
-        return supplierRepository.save(supplier);
+        return new SupplierPreviewDTO(supplierRepository.save(supplier));
     }
 
     public void deleteSupplier(Long id) {

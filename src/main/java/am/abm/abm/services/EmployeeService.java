@@ -29,6 +29,7 @@ public class EmployeeService {
     }
 
     public List<EmployeePreviewDTO> getAll() {
+
         return EmployeePreviewDTO.getEmployees(employeeRepository.findAll());
     }
 
