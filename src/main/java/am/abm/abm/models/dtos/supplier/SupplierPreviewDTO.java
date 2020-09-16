@@ -9,6 +9,7 @@ public class SupplierPreviewDTO {
     private Long supplierId;
     private int ordersCount;
     private String fullName;
+    private String address;
 
     public Long getSupplierId() {
         return supplierId;
@@ -34,9 +35,20 @@ public class SupplierPreviewDTO {
         this.fullName = fullName;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public SupplierPreviewDTO(Supplier supplier) {
         setSupplierId(supplier.getId());
         setOrdersCount(supplier.getProducts().size());
+        setFullName(supplier.getSupplierName());
+        setAddress(supplier.getAddress());
+
     }
     public static List<SupplierPreviewDTO> supplierPreviewDTOS(List<Supplier> suppliers){
         return suppliers.stream().map(SupplierPreviewDTO::new).collect(Collectors.toList());

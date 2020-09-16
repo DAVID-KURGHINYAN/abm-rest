@@ -8,6 +8,7 @@ public class SupplierCreateDTO {
     private String postalCode;
     private String country;
     private Long phone;
+    private int ordersCount;
 
     public String getSupplierName() {
         return supplierName;
@@ -63,5 +64,13 @@ public class SupplierCreateDTO {
 
     public void setPhone(Long phone) {
         this.phone = phone;
+    }
+
+    public int getOrdersCount() {
+        return ordersCount;
+    }
+
+    public void setOrdersCount(int ordersCount) {
+        this.ordersCount = ordersCount;
     }
 }

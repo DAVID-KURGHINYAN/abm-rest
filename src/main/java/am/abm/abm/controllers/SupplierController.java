@@ -42,5 +42,8 @@ public class SupplierController {
     public SupplierPreviewDTO details(@PathVariable Long id) {
         return supplierService.getSupplierDetails(id);
     }
+
+    @GetMapping("detail/{id}")
+    public SupplierPreviewDTO infoSupplier(@PathVariable Long id) {return supplierService.getInfoSupplier(id);}
 }
 

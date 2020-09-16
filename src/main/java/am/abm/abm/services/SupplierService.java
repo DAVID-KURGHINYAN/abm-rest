@@ -63,5 +63,14 @@ public class SupplierService {
         }
         return false;
     }
-
+    public SupplierPreviewDTO getInfoSupplier(Long id) {
+        Optional<Supplier> optionalSupplier = supplierRepository.findById(id);
+        if (optionalSupplier.isPresent()) {
+            Supplier supplier = optionalSupplier.get();
+            if (supplier.getProducts().size()>0) {
+                return new SupplierPreviewDTO(supplier);
+            }
+        }
+        return null;
+    }
 }

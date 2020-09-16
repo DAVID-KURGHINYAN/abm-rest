@@ -43,5 +43,7 @@ public class UserController {
     public UserPreviewDTO details(@PathVariable Long id) {
         return userService.getUserDetails(id);
     }
+
+
 }
 
