@@ -1,5 +1,6 @@
 package am.abm.abm.services;
 
+import am.abm.abm.exceptions.EntityNotFoundException;
 import am.abm.abm.models.dtos.shipper.ShipperCreateDTO;
 import am.abm.abm.models.dtos.shipper.ShipperDetailsDTO;
 import am.abm.abm.models.dtos.shipper.ShipperPreviewDTO;
@@ -18,13 +19,13 @@ public class ShipperService {
         this.shipperRepository = shipperRepository;
     }
 
-    public ShipperPreviewDTO getShipperDetails(Long id) {
+    public ShipperPreviewDTO getShipperDetails(Long id) throws EntityNotFoundException {
         Optional<Shipper> optionalShipper = shipperRepository.findById(id);
         if (optionalShipper.isPresent()) {
             Shipper shipper = optionalShipper.get();
             return new ShipperPreviewDTO(shipper);
         }
-        return null;
+        else throw new EntityNotFoundException();
     }
 
     public List<ShipperPreviewDTO> getAll() {

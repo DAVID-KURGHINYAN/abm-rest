@@ -1,5 +1,7 @@
 package am.abm.abm.controllers;
 
+import am.abm.abm.exceptions.EntityNotFoundException;
+import am.abm.abm.models.ResponseModel;
 import am.abm.abm.models.dtos.shipper.ShipperCreateDTO;
 import am.abm.abm.models.dtos.shipper.ShipperDetailsDTO;
 import am.abm.abm.models.dtos.shipper.ShipperPreviewDTO;
@@ -12,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("shipper/")
-public class ShipperController {
+public class ShipperController extends BaseController{
     private final ShipperService shipperService;
 
     public ShipperController(ShipperService shipperService) {
@@ -40,7 +42,11 @@ public class ShipperController {
     }
 
     @GetMapping("details/{id}")
-    public ShipperPreviewDTO details(@PathVariable Long id) {
-        return shipperService.getShipperDetails(id);
+    public ResponseModel details(@PathVariable Long id) {
+        try {
+            return createResult(shipperService.getShipperDetails(id), "Product details was retrieved successfully");
+        } catch (EntityNotFoundException e) {
+            return createErrorResult(e);
+        }
     }
 }

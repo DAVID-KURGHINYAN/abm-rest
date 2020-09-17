@@ -1,5 +1,6 @@
 package am.abm.abm.services;
 
+import am.abm.abm.exceptions.EntityNotFoundException;
 import am.abm.abm.models.dtos.product.ProductCreateDTO;
 import am.abm.abm.models.dtos.product.ProductDetailsDTO;
 import am.abm.abm.models.dtos.product.ProductPreviewDTO;
@@ -26,13 +27,13 @@ public class ProductService {
         this.supplierRepository = supplierRepository;
     }
 
-    public ProductDetailsDTO getProductDetails(Long id) {
+    public ProductDetailsDTO getProductDetails(Long id) throws EntityNotFoundException {
         Optional<Product> optionalProduct = productRepository.findById(id);
         if (optionalProduct.isPresent()) {
             Product product = optionalProduct.get();
             return new ProductDetailsDTO(product);
         }
-        return null;
+        else throw new EntityNotFoundException();
     }
 
     public List<Product> getAll() {  //inchi hamara?

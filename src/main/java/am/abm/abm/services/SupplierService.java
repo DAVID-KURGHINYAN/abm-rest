@@ -1,5 +1,6 @@
 package am.abm.abm.services;
 
+import am.abm.abm.exceptions.EntityNotFoundException;
 import am.abm.abm.models.dtos.supplier.SupplierCreateDTO;
 import am.abm.abm.models.dtos.supplier.SupplierDetailsDTO;
 import am.abm.abm.models.dtos.supplier.SupplierPreviewDTO;
@@ -56,13 +57,13 @@ public class SupplierService {
         return false;
     }
 
-    public SupplierPreviewDTO getSupplierDetails(Long id) {
+    public SupplierPreviewDTO getSupplierDetails(Long id) throws EntityNotFoundException {
         Optional<Supplier> optionalSupplier = supplierRepository.findById(id);
         if (optionalSupplier.isPresent()) {
             Supplier supplier = optionalSupplier.get();
             return new SupplierPreviewDTO(supplier);
         }
-        return null;
+        else throw new EntityNotFoundException();
     }
 
 }

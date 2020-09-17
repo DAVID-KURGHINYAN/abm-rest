@@ -1,8 +1,9 @@
 package am.abm.abm.controllers;
 
 
+import am.abm.abm.exceptions.EntityNotFoundException;
+import am.abm.abm.models.ResponseModel;
 import am.abm.abm.models.dtos.product.ProductCreateDTO;
-import am.abm.abm.models.dtos.product.ProductDetailsDTO;
 import am.abm.abm.models.dtos.product.ProductPreviewDTO;
 import am.abm.abm.models.enities.Product;
 import am.abm.abm.services.ProductService;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("product/")
-public class ProductController {
+public class ProductController extends BaseController {
     private final ProductService productService;
 
     public ProductController(ProductService productService) {
@@ -45,7 +46,12 @@ public class ProductController {
     }
 
     @GetMapping("details/{id}")
-    public ProductDetailsDTO details(@PathVariable Long id) {
-        return productService.getProductDetails(id);
+    public ResponseModel details(@PathVariable Long id) {
+
+        try {
+            return createResult(productService.getProductDetails(id), "Product details was retrieved successfully");
+        } catch (EntityNotFoundException e) {
+            return createErrorResult(e);
+        }
     }
 }
