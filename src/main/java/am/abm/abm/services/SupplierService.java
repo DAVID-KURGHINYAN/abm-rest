@@ -18,14 +18,6 @@ public class SupplierService {
         this.supplierRepository = supplierRepository;
     }
 
-    public SupplierPreviewDTO getSupplierDetails(Long id) {
-        Optional<Supplier> optionalSupplier = supplierRepository.findById(id);
-        if (optionalSupplier.isPresent()) {
-            Supplier supplier = optionalSupplier.get();
-            return new SupplierPreviewDTO(supplier);
-        }
-        return null;
-    }
 
     public List<SupplierPreviewDTO> getAll() {
         return SupplierPreviewDTO.supplierPreviewDTOS(supplierRepository.findAll());
@@ -63,14 +55,14 @@ public class SupplierService {
         }
         return false;
     }
-    public SupplierPreviewDTO getInfoSupplier(Long id) {
+
+    public SupplierPreviewDTO getSupplierDetails(Long id) {
         Optional<Supplier> optionalSupplier = supplierRepository.findById(id);
         if (optionalSupplier.isPresent()) {
             Supplier supplier = optionalSupplier.get();
-            if (supplier.getProducts().size()>0) {
-                return new SupplierPreviewDTO(supplier);
-            }
+            return new SupplierPreviewDTO(supplier);
         }
         return null;
     }
+
 }
