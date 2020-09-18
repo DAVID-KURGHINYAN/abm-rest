@@ -40,7 +40,7 @@ public class SupplierController extends BaseController {
     }
 
     @GetMapping("details/{id}")
-    public ResponseModel<SupplierPreviewDTO> details(@PathVariable Long id) {
+    public ResponseModel details(@PathVariable Long id) {
         try {
             return createResult(supplierService.getSupplierDetails(id), "Supplier detail was retrieved successfully");
         } catch (EntityNotFoundException e) {

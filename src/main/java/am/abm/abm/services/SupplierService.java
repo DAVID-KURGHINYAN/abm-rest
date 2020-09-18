@@ -2,7 +2,6 @@ package am.abm.abm.services;
 
 import am.abm.abm.exceptions.EntityNotFoundException;
 import am.abm.abm.models.dtos.supplier.SupplierCreateDTO;
-import am.abm.abm.models.dtos.supplier.SupplierDetailsDTO;
 import am.abm.abm.models.dtos.supplier.SupplierPreviewDTO;
 import am.abm.abm.models.enities.Supplier;
 import am.abm.abm.repositories.SupplierRepository;

@@ -1,9 +1,9 @@
 package am.abm.abm.controllers;
 
+import am.abm.abm.exceptions.EntityNotFoundException;
+import am.abm.abm.models.ResponseModel;
 import am.abm.abm.models.dtos.employee.EmployeeCreateDTO;
-import am.abm.abm.models.dtos.employee.EmployeeDetailsDTO;
 import am.abm.abm.models.dtos.employee.EmployeePreviewDTO;
-import am.abm.abm.models.enities.Employee;
 import am.abm.abm.services.EmployeeService;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("employee/")
-public class EmployeeController {
+public class EmployeeController extends BaseController{
     private final EmployeeService employeeService;
 
     public EmployeeController(EmployeeService employeeService) {
@@ -39,7 +39,12 @@ public class EmployeeController {
     }
 
     @GetMapping("details/{id}")
-    public EmployeePreviewDTO details(@PathVariable Long id) {
-        return employeeService.getEmployeeDetails(id);
+    public ResponseModel details(@PathVariable Long id) {
+        try {
+            return createResult(employeeService.getEmployeeDetails(id),"Product details was retrieved successfully");
+        }
+        catch (EntityNotFoundException e) {
+            return createErrorResult(e);
+        }
     }
 }

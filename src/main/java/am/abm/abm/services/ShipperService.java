@@ -2,7 +2,6 @@ package am.abm.abm.services;
 
 import am.abm.abm.exceptions.EntityNotFoundException;
 import am.abm.abm.models.dtos.shipper.ShipperCreateDTO;
-import am.abm.abm.models.dtos.shipper.ShipperDetailsDTO;
 import am.abm.abm.models.dtos.shipper.ShipperPreviewDTO;
 import am.abm.abm.models.enities.Shipper;
 import am.abm.abm.repositories.ShipperRepository;

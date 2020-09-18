@@ -3,18 +3,15 @@ package am.abm.abm.controllers;
 import am.abm.abm.exceptions.EntityNotFoundException;
 import am.abm.abm.models.ResponseModel;
 import am.abm.abm.models.dtos.shipper.ShipperCreateDTO;
-import am.abm.abm.models.dtos.shipper.ShipperDetailsDTO;
 import am.abm.abm.models.dtos.shipper.ShipperPreviewDTO;
-import am.abm.abm.models.dtos.user.UserDetailsDTO;
-import am.abm.abm.models.enities.Shipper;
 import am.abm.abm.services.ShipperService;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
 @RequestMapping("shipper/")
 public class ShipperController extends BaseController{
+
     private final ShipperService shipperService;
 
     public ShipperController(ShipperService shipperService) {

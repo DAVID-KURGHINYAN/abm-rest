@@ -1,17 +1,16 @@
 package am.abm.abm.controllers;
 
+import am.abm.abm.exceptions.EntityNotFoundException;
+import am.abm.abm.models.ResponseModel;
 import am.abm.abm.models.dtos.user.UserCreateDTO;
-import am.abm.abm.models.dtos.user.UserDetailsDTO;
 import am.abm.abm.models.dtos.user.UserPreviewDTO;
-import am.abm.abm.models.enities.User;
 import am.abm.abm.services.UserService;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController()
 @RequestMapping("user/")
-public class UserController {
+public class UserController extends BaseController {
 
     private final UserService userService;
 
@@ -40,10 +39,15 @@ public class UserController {
     }
 
     @GetMapping("details/{id}")
-    public UserPreviewDTO details(@PathVariable Long id) {
-        return userService.getUserDetails(id);
+    public ResponseModel details(@PathVariable Long id) {
+        try {
+            return createResult(userService.getUserDetails(id), "Product details was retrieved successfully");
+        } catch (EntityNotFoundException e) {
+            return createErrorResult(e);
+        }
     }
-
-
 }
+
+
+
 

@@ -1,5 +1,6 @@
 package am.abm.abm.services;
 
+import am.abm.abm.exceptions.EntityNotFoundException;
 import am.abm.abm.models.dtos.employee.EmployeeCreateDTO;
 import am.abm.abm.models.dtos.employee.EmployeeDetailsDTO;
 import am.abm.abm.models.dtos.employee.EmployeePreviewDTO;
@@ -19,13 +20,13 @@ public class EmployeeService {
         this.employeeRepository = employeeRepository;
     }
 
-    public EmployeePreviewDTO getEmployeeDetails(Long id) {
+    public EmployeePreviewDTO getEmployeeDetails(Long id) throws EntityNotFoundException {
         Optional<Employee> optionalEmployee = employeeRepository.findById(id);
         if (optionalEmployee.isPresent()) {
             Employee employee = optionalEmployee.get();
             return new EmployeePreviewDTO(employee);
         }
-        return null;
+        else throw new EntityNotFoundException();
     }
 
     public List<EmployeePreviewDTO> getAll() {

@@ -47,7 +47,6 @@ public class ProductController extends BaseController {
 
     @GetMapping("details/{id}")
     public ResponseModel details(@PathVariable Long id) {
-
         try {
             return createResult(productService.getProductDetails(id), "Product details was retrieved successfully");
         } catch (EntityNotFoundException e) {

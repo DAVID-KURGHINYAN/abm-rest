@@ -1,7 +1,7 @@
 package am.abm.abm.services;
 
+import am.abm.abm.exceptions.EntityNotFoundException;
 import am.abm.abm.models.dtos.user.UserCreateDTO;
-import am.abm.abm.models.dtos.user.UserDetailsDTO;
 import am.abm.abm.models.dtos.user.UserPreviewDTO;
 import am.abm.abm.models.enities.User;
 import am.abm.abm.repositories.UserRepository;
@@ -18,13 +18,13 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public UserPreviewDTO getUserDetails(Long id) {
+    public UserPreviewDTO getUserDetails(Long id) throws EntityNotFoundException {
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             return new UserPreviewDTO(user);
         }
-        return null;
+        else throw new EntityNotFoundException();
     }
 
     public List<UserPreviewDTO> getAll() {

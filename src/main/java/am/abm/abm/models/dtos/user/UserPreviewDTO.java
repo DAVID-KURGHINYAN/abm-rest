@@ -1,9 +1,6 @@
 package am.abm.abm.models.dtos.user;
 
-import am.abm.abm.models.dtos.employee.EmployeePreviewDTO;
-import am.abm.abm.models.enities.Employee;
 import am.abm.abm.models.enities.User;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
