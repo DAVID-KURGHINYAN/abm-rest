@@ -6,6 +6,10 @@ import am.abm.abm.models.dtos.user.UserCreateDTO;
 import am.abm.abm.models.dtos.user.UserPreviewDTO;
 import am.abm.abm.services.UserService;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.util.List;
 
 @RestController()
@@ -24,7 +28,7 @@ public class UserController extends BaseController {
     }
 
     @PostMapping("add")
-    public UserPreviewDTO addUser(@RequestBody UserCreateDTO user) {
+    public UserPreviewDTO addUser(@Valid @RequestBody UserCreateDTO user) {
         return userService.saveUser(user);
     }
 
@@ -39,7 +43,7 @@ public class UserController extends BaseController {
     }
 
     @GetMapping("details/{id}")
-    public ResponseModel details(@PathVariable Long id) {
+    public ResponseModel details(@PathVariable @Min(1) @Max(5) Long id) {
         try {
             return createResult(userService.getUserDetails(id), "Product details was retrieved successfully");
         } catch (EntityNotFoundException e) {

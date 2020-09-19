@@ -1,11 +1,17 @@
 package am.abm.abm.models.dtos.user;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+
 public class UserCreateDTO {
     private String address;
     private String city;
     private String contactName;
     private String country;
+    @NotBlank(message = "customer name is reuqired")
     private String customerName;
+    @NotBlank(message = "Postal code is required")
     private String postalCode;
 
     public String getAddress() {

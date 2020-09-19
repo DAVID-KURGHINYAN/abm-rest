@@ -7,6 +7,8 @@ import am.abm.abm.models.dtos.supplier.SupplierPreviewDTO;
 import am.abm.abm.services.SupplierService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import java.util.List;
 
 @RestController
@@ -24,13 +26,13 @@ public class SupplierController extends BaseController {
     }
 
     @PostMapping("add")
-    public SupplierPreviewDTO addSupplier(@RequestBody SupplierCreateDTO supplier) {
+    public SupplierPreviewDTO addSupplier(@Valid @RequestBody SupplierCreateDTO supplier) {
 
         return supplierService.saveSupplier(supplier);
     }
 
     @PutMapping("edit/{id}")
-    public boolean editSupplier(@RequestBody SupplierCreateDTO supplier, @PathVariable Long id) {
+    public boolean editSupplier(@RequestBody SupplierCreateDTO supplier, @PathVariable @Min(1) Long id) {
         return supplierService.editSupplier(supplier, id);
     }
 
@@ -40,7 +42,7 @@ public class SupplierController extends BaseController {
     }
 
     @GetMapping("details/{id}")
-    public ResponseModel details(@PathVariable Long id) {
+    public ResponseModel details(@PathVariable @Min(1) Long id) {
         try {
             return createResult(supplierService.getSupplierDetails(id), "Supplier detail was retrieved successfully");
         } catch (EntityNotFoundException e) {
