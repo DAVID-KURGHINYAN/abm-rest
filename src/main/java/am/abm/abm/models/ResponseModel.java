@@ -1,11 +1,12 @@
 package am.abm.abm.models;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class ResponseModel<T> implements Serializable {
     private T data;
     private boolean success;
-    private String message;
+    private List<String> message;
 
     public T getData() {
         return data;
@@ -23,11 +24,11 @@ public class ResponseModel<T> implements Serializable {
         this.success = success;
     }
 
-    public String getMessage() {
+    public List<String> getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
+    public void setMessage(List<String> message) {
         this.message = message;
     }
 }

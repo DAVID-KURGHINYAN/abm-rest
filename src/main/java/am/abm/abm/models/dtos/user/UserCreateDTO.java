@@ -9,9 +9,11 @@ public class UserCreateDTO {
     private String city;
     private String contactName;
     private String country;
-    @NotBlank(message = "customer name is reuqired")
+    @NotBlank(message = "Customer name is required")
     private String customerName;
     @NotBlank(message = "Postal code is required")
+    @Min(3)
+    @Max(10)
     private String postalCode;
 
     public String getAddress() {

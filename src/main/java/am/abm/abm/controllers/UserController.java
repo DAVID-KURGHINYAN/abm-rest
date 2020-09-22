@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @RestController()
@@ -43,7 +44,7 @@ public class UserController extends BaseController {
     }
 
     @GetMapping("details/{id}")
-    public ResponseModel details(@PathVariable @Min(1) @Max(5) Long id) {
+    public ResponseModel details(@Valid @PathVariable @Min(1) Long id) {
         try {
             return createResult(userService.getUserDetails(id), "Product details was retrieved successfully");
         } catch (EntityNotFoundException e) {
@@ -51,7 +52,3 @@ public class UserController extends BaseController {
         }
     }
 }
-
-
-
-
