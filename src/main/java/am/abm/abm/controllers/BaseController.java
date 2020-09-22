@@ -46,9 +46,10 @@ public class BaseController {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseModel handleValidationExceptions(
-            MethodArgumentNotValidException ex) {
+    public ResponseModel handleValidationExceptions(MethodArgumentNotValidException ex) {
+
         List<String> errors = new ArrayList<>();
+
         ex.getBindingResult().getAllErrors().forEach((error) -> {
             String fieldName = ((FieldError) error).getField();
             if (((FieldError) error).getRejectedValue() != null) {

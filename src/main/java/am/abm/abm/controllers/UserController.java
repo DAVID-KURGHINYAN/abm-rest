@@ -6,6 +6,7 @@ import am.abm.abm.models.dtos.user.UserCreateDTO;
 import am.abm.abm.models.dtos.user.UserPreviewDTO;
 import am.abm.abm.services.UserService;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
@@ -50,5 +51,11 @@ public class UserController extends BaseController {
         } catch (EntityNotFoundException e) {
             return createErrorResult(e);
         }
+    }
+
+    @PostMapping("/image")
+    public String handleFileUpload(@RequestParam("file") MultipartFile file) {
+///https://dzone.com/articles/java-springboot-rest-api-to-uploaddownload-file-on
+        return "redirect:/";
     }
 }
