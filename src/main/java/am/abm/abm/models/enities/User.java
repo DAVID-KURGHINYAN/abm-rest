@@ -13,9 +13,18 @@ public class User extends Base {
     private String city;
     private String postalCode;
     private String country;
+    private String avatar;
 
     @OneToMany(mappedBy = "user")
     private Set<Order> orders;
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
     public String getCustomerName() {
         return customerName;

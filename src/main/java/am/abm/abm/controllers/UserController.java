@@ -4,6 +4,7 @@ import am.abm.abm.exceptions.EntityNotFoundException;
 import am.abm.abm.models.ResponseModel;
 import am.abm.abm.models.dtos.user.UserCreateDTO;
 import am.abm.abm.models.dtos.user.UserPreviewDTO;
+import am.abm.abm.models.enities.User;
 import am.abm.abm.services.UserService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -12,6 +13,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import java.io.IOException;
 import java.util.List;
 
 @RestController()
@@ -32,6 +34,15 @@ public class UserController extends BaseController {
     @PostMapping("add")
     public UserPreviewDTO addUser(@Valid @RequestBody UserCreateDTO user) {
         return userService.saveUser(user);
+    }
+
+    @PostMapping("avatar")
+    public ResponseModel uploadUserAvatar(@RequestParam("avatar") MultipartFile avatar, @RequestParam("id") Long userId){
+        try {
+            return createResult(userService.uploadUserAvatar(avatar, userId), "User avatar was uploaded successfully");
+        } catch (Exception e) {
+            return createErrorResult(e);
+        }
     }
 
     @PutMapping("edit/{id}")

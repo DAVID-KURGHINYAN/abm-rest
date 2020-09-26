@@ -9,6 +9,15 @@ public class UserPreviewDTO {
     private int orderCount;
     private String userName;
     private String address;
+    private String avatar;
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
     public Long getUserId() {
         return userId;
