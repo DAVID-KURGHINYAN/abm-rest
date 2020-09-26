@@ -9,11 +9,20 @@ public class Category extends Base {
 
     private String categoryName;
     private String description;
+    private String categoryAvatar;
 
     @OneToMany(mappedBy = "category")
     private Set<Product> products;
 
     public Category() {
+    }
+
+    public String getCategoryAvatar() {
+        return categoryAvatar;
+    }
+
+    public void setCategoryAvatar(String categoryAvatar) {
+        this.categoryAvatar = categoryAvatar;
     }
 
     public String getCategoryName() {

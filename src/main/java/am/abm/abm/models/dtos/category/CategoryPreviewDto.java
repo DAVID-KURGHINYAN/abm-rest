@@ -9,6 +9,15 @@ public class CategoryPreviewDto {
     private String description;
     private Long categoryId;
     private int productsCount;
+    private String categoryAvatar;
+
+    public String getCategoryAvatar() {
+        return categoryAvatar;
+    }
+
+    public void setCategoryAvatar(String categoryAvatar) {
+        this.categoryAvatar = categoryAvatar;
+    }
 
     public int getProductsCount() {
         return productsCount;
@@ -50,5 +59,6 @@ public class CategoryPreviewDto {
         this.setProductsCount(category.getProducts().size());
         this.setCategoryId(category.getId());
         this.setDescription(category.getDescription());
+        this.setCategoryAvatar(category.getCategoryAvatar());
     }
 }

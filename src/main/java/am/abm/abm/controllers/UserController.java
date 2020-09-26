@@ -4,16 +4,12 @@ import am.abm.abm.exceptions.EntityNotFoundException;
 import am.abm.abm.models.ResponseModel;
 import am.abm.abm.models.dtos.user.UserCreateDTO;
 import am.abm.abm.models.dtos.user.UserPreviewDTO;
-import am.abm.abm.models.enities.User;
 import am.abm.abm.services.UserService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import java.io.IOException;
 import java.util.List;
 
 @RestController()
