@@ -5,9 +5,15 @@ import am.abm.abm.models.dtos.category.CategoryCreateDTO;
 import am.abm.abm.models.dtos.category.CategoryDetailsDTO;
 import am.abm.abm.models.dtos.category.CategoryPreviewDto;
 import am.abm.abm.services.CategoryService;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.activation.FileTypeMap;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 
 @RestController
@@ -52,4 +58,5 @@ public class CategoryController extends BaseController {
     public CategoryDetailsDTO details(@PathVariable Long id) {
         return categoryService.getCategoryDetails(id);
     }
+
 }

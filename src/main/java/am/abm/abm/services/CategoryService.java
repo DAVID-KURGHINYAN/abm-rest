@@ -58,9 +58,9 @@ public class CategoryService {
     public String write(MultipartFile file) throws IOException {
         String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMddHHmmss-"));
         String fileName = date + file.getOriginalFilename();
-        String filePath = "src/main/categoryUploads/"  + fileName;
+        String filePath = "src/main/resources/media/"  + fileName;
         Files.copy(file.getInputStream(), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
-        return filePath;
+        return fileName;
     }
     public void deleteCategory(Long id) {
         categoryRepository.deleteById(id);

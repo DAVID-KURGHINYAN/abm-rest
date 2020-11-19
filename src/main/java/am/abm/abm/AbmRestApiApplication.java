@@ -9,5 +9,6 @@ public class AbmRestApiApplication {
     public static void main(String[] args) {
         SpringApplication.run(AbmRestApiApplication.class, args);
     }
+
 }
 

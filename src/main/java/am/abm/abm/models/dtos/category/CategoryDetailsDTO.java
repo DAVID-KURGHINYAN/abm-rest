@@ -10,6 +10,7 @@ import java.util.List;
 public class CategoryDetailsDTO {
     private Long id;
     private String categoryName;
+    private String avatar;
 
     List<ProductPreviewDTO> products;
 
@@ -37,10 +38,19 @@ public class CategoryDetailsDTO {
         this.categoryName = categoryName;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
     public CategoryDetailsDTO(Category category) {
         id = category.getId();
-        categoryName = category.getCategoryName();
+        categoryName =  category.getCategoryName();
         products = new ArrayList<>();
+        avatar = "/media/image/" + category.getCategoryAvatar() + "/";
         category.getProducts().forEach(product -> {
             products.add(new ProductPreviewDTO(product));
         });
