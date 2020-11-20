@@ -13,6 +13,8 @@ public class Product extends Base {
     @JoinColumn(name = "supplierId", nullable = false)
     Supplier supplier;
 
+
+
     @ManyToOne
     @JoinColumn(name = "categoryId", nullable = false)
     Category category;

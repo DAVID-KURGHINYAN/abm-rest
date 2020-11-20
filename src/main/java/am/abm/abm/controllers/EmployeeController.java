@@ -43,7 +43,8 @@ public class EmployeeController extends BaseController{
         try {
             return createResult(employeeService.getEmployeeDetails(id),"Product details was retrieved successfully");
         }
-        catch (EntityNotFoundException e) {
+        catch (EntityNotFoundException
+                e) {
             return createErrorResult(e);
         }
     }
