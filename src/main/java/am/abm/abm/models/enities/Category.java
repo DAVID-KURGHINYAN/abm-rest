@@ -1,51 +1,25 @@
 package am.abm.abm.models.enities;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.Set;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 public class Category extends Base {
 
-    private String categoryName;
-    private String description;
     private String categoryAvatar;
 
     @OneToMany(mappedBy = "category")
     private Set<Product> products;
 
-    public Category() {
-    }
-
-    public String getCategoryAvatar() {
-        return categoryAvatar;
-    }
-
-    public void setCategoryAvatar(String categoryAvatar) {
-        this.categoryAvatar = categoryAvatar;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Set<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(Set<Product> products) {
-        this.products = products;
-    }
+    @OneToMany(mappedBy = "category")
+    private Set<CategoryTranslation> translations;
 }

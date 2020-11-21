@@ -4,6 +4,7 @@ import am.abm.abm.models.ResponseModel;
 import am.abm.abm.models.dtos.category.CategoryCreateDTO;
 import am.abm.abm.models.dtos.category.CategoryDetailsDTO;
 import am.abm.abm.models.dtos.category.CategoryPreviewDto;
+import am.abm.abm.models.enums.Language;
 import am.abm.abm.services.CategoryService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +37,7 @@ public class CategoryController extends BaseController {
     }
 
     @PostMapping("categoryAvatar")
-    public ResponseModel uploadCategoryAvatar(@RequestParam("categoryAvatar") MultipartFile categoryAvatar, @RequestParam ("id") Long categoryId) {
+    public ResponseModel uploadCategoryAvatar(@RequestParam("categoryAvatar") MultipartFile categoryAvatar, @RequestParam("id") Long categoryId) {
         try {
             return createResult(categoryService.uploadCategoryAvatar(categoryAvatar, categoryId), "Category avatar was uploaded successfully");
         } catch (Exception e) {
@@ -54,9 +55,9 @@ public class CategoryController extends BaseController {
         categoryService.deleteCategory(id);
     }
 
-    @GetMapping("details/{id}")
-    public CategoryDetailsDTO details(@PathVariable Long id) {
-        return categoryService.getCategoryDetails(id);
+    @GetMapping("details/{id}/{language}")
+    public CategoryDetailsDTO details(@PathVariable Long id, @PathVariable Language language) {
+        return categoryService.getCategoryDetails(id, language);
     }
 
 }

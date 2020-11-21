@@ -60,7 +60,7 @@ public class ProductPreviewDTO {
 
     public ProductPreviewDTO(Product product)
     {
-        this.setCategoryName(product.getCategory().getCategoryName());
+        //this.setCategoryName(product.getCategory().getCategoryName());
         this.setSupplierName(product.getSupplier().getSupplierName());
         this.setProductName(product.getProductName());
         this.setPrice(product.getPrice());

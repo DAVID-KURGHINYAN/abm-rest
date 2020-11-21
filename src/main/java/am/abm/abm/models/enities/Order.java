@@ -1,10 +1,17 @@
 package am.abm.abm.models.enities;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Set;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 @Table(name = "Orders")
 public class Order extends Base {
 
@@ -24,49 +31,4 @@ public class Order extends Base {
 
     @OneToMany(mappedBy = "order")
     private Set<OrderDetail> orderDetails;
-
-
-
-    public Date getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Shipper getShipper() {
-        return shipper;
-    }
-
-    public void setShipper(Shipper shipper) {
-        this.shipper = shipper;
-    }
-
-    public Set<OrderDetail> getOrderDetails() {
-        return orderDetails;
-    }
-
-    public void setOrderDetails(Set<OrderDetail> orderDetails) {
-        this.orderDetails = orderDetails;
-    }
-
-    public Order() {
-    }
 }

@@ -1,22 +1,28 @@
 package am.abm.abm.models.dtos.category;
 
+import am.abm.abm.models.enities.Category;
+import am.abm.abm.models.enities.CategoryTranslation;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Getter
+@Setter
 public class CategoryCreateDTO {
-    private String categoryName;
-    private String description;
+   private List<CategoryTranslationDTO> translations;
 
-    public String getCategoryName() {
-        return categoryName;
-    }
+   public List<CategoryTranslation> getTranslations(List<CategoryTranslationDTO> categoryTranslationDTOS, Category category) {
+      List<CategoryTranslation> translations = new ArrayList<>();
+      categoryTranslationDTOS.forEach(categoryTranslationDTO -> {
+         translations.add(CategoryTranslation.builder()
+                 .category(category)
+                 .categoryName(categoryTranslationDTO.getCategoryName())
+                 .description(categoryTranslationDTO.getDescription())
+                 .language(categoryTranslationDTO.getLanguage()).build());
+      });
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
+      return translations;
+   }
 }

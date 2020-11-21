@@ -5,7 +5,10 @@ import am.abm.abm.models.dtos.category.CategoryCreateDTO;
 import am.abm.abm.models.dtos.category.CategoryDetailsDTO;
 import am.abm.abm.models.dtos.category.CategoryPreviewDto;
 import am.abm.abm.models.enities.Category;
+import am.abm.abm.models.enities.CategoryTranslation;
+import am.abm.abm.models.enums.Language;
 import am.abm.abm.repositories.CategoryRepository;
+import am.abm.abm.repositories.CategoryTranslateRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,16 +24,21 @@ import java.util.stream.Collectors;
 @Service
 public class CategoryService {
     private final CategoryRepository categoryRepository;
+    private final CategoryTranslateRepository categoryTranslateRepository;
 
-    public CategoryService(CategoryRepository categoryRepository) {
+    public CategoryService(CategoryRepository categoryRepository, CategoryTranslateRepository categoryTranslateRepository) {
         this.categoryRepository = categoryRepository;
+        this.categoryTranslateRepository = categoryTranslateRepository;
     }
 
-    public CategoryDetailsDTO getCategoryDetails(Long id) {
-        Optional<Category> optionalCategory = categoryRepository.findById(id);
-        if (optionalCategory.isPresent()) {
-            Category category = optionalCategory.get();
-            return new CategoryDetailsDTO(category);
+    public CategoryDetailsDTO getCategoryDetails(Long id, Language language) {
+        Optional<Category> optional = categoryRepository.findById(id);
+        if(optional.isPresent()) {
+            Optional<CategoryTranslation> translation = categoryTranslateRepository.findByCategoryAndLanguage(optional.get(), language);
+            if (translation.isPresent()) {
+                CategoryTranslation categoryTranslation = translation.get();
+                return new CategoryDetailsDTO(categoryTranslation);
+            }
         }
         return null;
     }
@@ -42,10 +50,14 @@ public class CategoryService {
 
     public CategoryPreviewDto saveCategory(CategoryCreateDTO categoryCreateDTO) {
         Category category = new Category();
-        category.setCategoryName(categoryCreateDTO.getCategoryName());
-        category.setDescription(categoryCreateDTO.getDescription());
-        return new CategoryPreviewDto(categoryRepository.save(category));
+        category = categoryRepository.save(category);
+        List<CategoryTranslation> translations = categoryCreateDTO.getTranslations(categoryCreateDTO.getTranslations(), category);
+        for (CategoryTranslation translation :translations) {
+            categoryTranslateRepository.save(translation);
+        }
+        return new CategoryPreviewDto(category);
     }
+
     public CategoryPreviewDto uploadCategoryAvatar(MultipartFile categoryAvatar, Long categoryId) throws EntityNotFoundException, IOException {
         Optional<Category> optionalCategory = categoryRepository.findById(categoryId);
         if (optionalCategory.isEmpty()) {
@@ -55,13 +67,15 @@ public class CategoryService {
         category.setCategoryAvatar(write(categoryAvatar));
         return new CategoryPreviewDto(categoryRepository.save(category));
     }
+
     public String write(MultipartFile file) throws IOException {
         String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMddHHmmss-"));
         String fileName = date + file.getOriginalFilename();
-        String filePath = "src/main/resources/media/"  + fileName;
+        String filePath = "src/main/resources/media/" + fileName;
         Files.copy(file.getInputStream(), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
         return fileName;
     }
+
     public void deleteCategory(Long id) {
         categoryRepository.deleteById(id);
     }
@@ -70,8 +84,8 @@ public class CategoryService {
         Optional<Category> optionalCategory = categoryRepository.findById(id);
         if (optionalCategory.isPresent()) {
             Category oldCategory = optionalCategory.get();
-            oldCategory.setCategoryName(category.getCategoryName());
-            oldCategory.setDescription(category.getDescription());
+            //oldCategory.setCategoryName(category.getCategoryName());
+            //oldCategory.setDescription(category.getDescription());
             categoryRepository.save(oldCategory);
             return true;
         }

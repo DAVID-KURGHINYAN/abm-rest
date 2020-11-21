@@ -2,6 +2,7 @@ package am.abm.abm.models.dtos.category;
 
 import am.abm.abm.models.dtos.product.ProductPreviewDTO;
 import am.abm.abm.models.enities.Category;
+import am.abm.abm.models.enities.CategoryTranslation;
 import am.abm.abm.models.enities.Product;
 
 import java.util.ArrayList;
@@ -46,12 +47,12 @@ public class CategoryDetailsDTO {
         this.avatar = avatar;
     }
 
-    public CategoryDetailsDTO(Category category) {
-        id = category.getId();
-        categoryName =  category.getCategoryName();
+    public CategoryDetailsDTO(CategoryTranslation translation) {
+        id = translation.getCategory().getId();
+        categoryName =  translation.getCategoryName();
         products = new ArrayList<>();
-        avatar = "/media/image/" + category.getCategoryAvatar() + "/";
-        category.getProducts().forEach(product -> {
+        avatar = "/media/image/" + translation.getCategory().getCategoryAvatar() + "/";
+        translation.getCategory().getProducts().forEach(product -> {
             products.add(new ProductPreviewDTO(product));
         });
     }
