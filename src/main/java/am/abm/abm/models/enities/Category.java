@@ -22,4 +22,8 @@ public class Category extends Base {
 
     @OneToMany(mappedBy = "category")
     private Set<CategoryTranslation> translations;
+
+
+    public void setCategoryAvatar(String write) {
+    }
 }

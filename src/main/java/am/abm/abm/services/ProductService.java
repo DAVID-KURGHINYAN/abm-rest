@@ -6,9 +6,12 @@ import am.abm.abm.models.dtos.product.ProductDetailsDTO;
 import am.abm.abm.models.dtos.product.ProductPreviewDTO;
 import am.abm.abm.models.enities.Category;
 import am.abm.abm.models.enities.Product;
+import am.abm.abm.models.enities.ProductTranslation;
 import am.abm.abm.models.enities.Supplier;
+import am.abm.abm.models.enums.Language;
 import am.abm.abm.repositories.CategoryRepository;
 import am.abm.abm.repositories.ProductRepository;
+import am.abm.abm.repositories.ProductTranslationRepository;
 import am.abm.abm.repositories.SupplierRepository;
 import org.springframework.stereotype.Service;
 
@@ -18,18 +21,25 @@ import java.util.Optional;
 @Service
 public class ProductService {
     private final ProductRepository productRepository;
+    private final ProductTranslationRepository productTranslationRepository;
     private final CategoryRepository categoryRepository;
     private final SupplierRepository supplierRepository;
 
-    public ProductService(ProductRepository productRepository, CategoryRepository categoryRepository, SupplierRepository supplierRepository) {
+    public ProductService(ProductRepository productRepository, ProductTranslationRepository productTranslationRepository, CategoryRepository categoryRepository, SupplierRepository supplierRepository) {
         this.productRepository = productRepository;
+        this.productTranslationRepository = productTranslationRepository;
         this.categoryRepository = categoryRepository;
         this.supplierRepository = supplierRepository;
     }
 
-    public ProductDetailsDTO getProductDetails(Long id) throws EntityNotFoundException {
+    public ProductDetailsDTO getProductDetails(Long id, Language language) throws EntityNotFoundException {
         Optional<Product> optionalProduct = productRepository.findById(id);
         if (optionalProduct.isPresent()) {
+            Optional<ProductTranslation> productTranslation = productTranslationRepository.findByProductAndLanguage(optionalProduct.get(), language);
+            if (productTranslation.isPresent()){
+                ProductTranslation productTranslation1 = productTranslation.get();
+                return new ProductDetailsDTO(productTranslation);
+            }
             Product product = optionalProduct.get();
             return new ProductDetailsDTO(product);
         }
