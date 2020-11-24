@@ -74,6 +74,7 @@ public class CategoryService {
         String fileName = date + file.getOriginalFilename();
         String filePath = "src/main/resources/media/" + fileName;
         Files.copy(file.getInputStream(), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
+        //test
         return fileName;
     }
 
