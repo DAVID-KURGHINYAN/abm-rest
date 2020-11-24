@@ -1,6 +1,7 @@
 package am.abm.abm.models.enities;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -9,8 +10,8 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 public class Product extends Base {
-    private String productName;
     private String unit;
     private int price;
 
@@ -27,7 +28,4 @@ public class Product extends Base {
 
     @OneToMany(mappedBy = "product")
     private Set<ProductTranslation> translations;
-
-    public Product() {
-    }
 }

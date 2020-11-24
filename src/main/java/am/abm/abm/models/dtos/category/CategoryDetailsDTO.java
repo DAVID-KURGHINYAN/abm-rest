@@ -1,9 +1,8 @@
 package am.abm.abm.models.dtos.category;
 
 import am.abm.abm.models.dtos.product.ProductPreviewDTO;
-import am.abm.abm.models.enities.Category;
 import am.abm.abm.models.enities.CategoryTranslation;
-import am.abm.abm.models.enities.Product;
+import am.abm.abm.models.enums.Language;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,13 +46,13 @@ public class CategoryDetailsDTO {
         this.avatar = avatar;
     }
 
-    public CategoryDetailsDTO(CategoryTranslation translation) {
+    public CategoryDetailsDTO(CategoryTranslation translation, Language language) {
         id = translation.getCategory().getId();
         categoryName =  translation.getCategoryName();
         products = new ArrayList<>();
         avatar = "/media/image/" + translation.getCategory().getCategoryAvatar() + "/";
         translation.getCategory().getProducts().forEach(product -> {
-            products.add(new ProductPreviewDTO(product));
+            products.add(new ProductPreviewDTO(product, language));
         });
     }
 }

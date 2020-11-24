@@ -1,14 +1,10 @@
 package am.abm.abm.models.dtos.category;
 
-import am.abm.abm.models.enities.Category;
 import am.abm.abm.models.enities.CategoryTranslation;
 import am.abm.abm.models.enums.Language;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter

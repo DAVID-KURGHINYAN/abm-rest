@@ -38,7 +38,7 @@ public class CategoryService {
             Optional<CategoryTranslation> translation = categoryTranslateRepository.findByCategoryAndLanguage(optional.get(), language);
             if (translation.isPresent()) {
                 CategoryTranslation categoryTranslation = translation.get();
-                return new CategoryDetailsDTO(categoryTranslation);
+                return new CategoryDetailsDTO(categoryTranslation, language);
             }
         }
         return null;

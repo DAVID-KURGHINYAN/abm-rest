@@ -1,9 +1,8 @@
 package am.abm.abm.models.dtos.supplier;
 
-import am.abm.abm.models.dtos.order.OrderPreviewDTO;
 import am.abm.abm.models.dtos.product.ProductPreviewDTO;
-import am.abm.abm.models.enities.Product;
 import am.abm.abm.models.enities.Supplier;
+import am.abm.abm.models.enums.Language;
 
 import java.util.HashSet;
 import java.util.List;
@@ -60,7 +59,7 @@ public class SupplierPreviewDTO {
 //            products.add(previewDTO);
 //        }
             supplier.getProducts().forEach(item -> {
-            products.add(new ProductPreviewDTO(item));
+            products.add(new ProductPreviewDTO(item, Language.EN));
         });
     }
 

@@ -26,9 +26,9 @@ public class ProductController extends BaseController {
         return productService.getAll();
     }
 
-    @PostMapping("add")
-    public ProductPreviewDTO addProduct(@RequestBody ProductCreateDTO product) {
-        return productService.saveProduct(product);
+    @PostMapping("add/{language}")
+    public ProductPreviewDTO addProduct(@RequestBody ProductCreateDTO product, @PathVariable Language language) {
+        return productService.saveProduct(product, language);
     }
 
     @PutMapping("edit/{id}")
@@ -36,9 +36,9 @@ public class ProductController extends BaseController {
         return productService.editProduct(product, id);
     }
 
-    @PutMapping("change/{productId}{categoryId}")
-    public ProductPreviewDTO changeProductCategoryId(@PathVariable Long productId, @PathVariable Long categoryId) {
-        return productService.changeProductCategoryId(productId, categoryId);
+    @PutMapping("change/{productId}/{categoryId}/{language}")
+    public ProductPreviewDTO changeProductCategoryId(@PathVariable Long productId, @PathVariable Long categoryId, @PathVariable Language language) {
+        return productService.changeProductCategoryId(productId, categoryId, language);
     }
 
     @DeleteMapping("delete/{id}")

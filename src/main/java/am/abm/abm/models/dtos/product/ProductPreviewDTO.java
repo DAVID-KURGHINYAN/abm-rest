@@ -1,7 +1,15 @@
 package am.abm.abm.models.dtos.product;
 
 import am.abm.abm.models.enities.Product;
+import am.abm.abm.models.enities.ProductTranslation;
+import am.abm.abm.models.enums.Language;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.util.Optional;
+
+@Getter
+@Setter
 public class ProductPreviewDTO {
     private String productName;
     private String unit;
@@ -10,59 +18,13 @@ public class ProductPreviewDTO {
     private String supplierName;
     private long id;
 
-    public long getId() {
-        return id;
-    }
+    public ProductPreviewDTO(Product product, Language language) {
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public String getUnit() {
-        return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-    public String getSupplierName() {
-        return supplierName;
-    }
-
-    public void setSupplierName(String supplierName) {
-        this.supplierName = supplierName;
-    }
-
-    public ProductPreviewDTO(Product product)
-    {
+        Optional<ProductTranslation> productTranslation =
+                product.getTranslations().stream().filter(translation -> translation.getLanguage() == language).findFirst();
         //this.setCategoryName(product.getCategory().getCategoryName());
         this.setSupplierName(product.getSupplier().getSupplierName());
-        this.setProductName(product.getProductName());
+        productTranslation.ifPresent(translation -> this.setProductName(translation.getProductName()));
         this.setPrice(product.getPrice());
         this.setUnit(product.getUnit());
         this.setId(product.getId());

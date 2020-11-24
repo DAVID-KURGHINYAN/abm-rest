@@ -4,10 +4,7 @@ import am.abm.abm.exceptions.EntityNotFoundException;
 import am.abm.abm.models.dtos.product.ProductCreateDTO;
 import am.abm.abm.models.dtos.product.ProductDetailsDTO;
 import am.abm.abm.models.dtos.product.ProductPreviewDTO;
-import am.abm.abm.models.enities.Category;
-import am.abm.abm.models.enities.Product;
-import am.abm.abm.models.enities.ProductTranslation;
-import am.abm.abm.models.enities.Supplier;
+import am.abm.abm.models.enities.*;
 import am.abm.abm.models.enums.Language;
 import am.abm.abm.repositories.CategoryRepository;
 import am.abm.abm.repositories.ProductRepository;
@@ -48,7 +45,7 @@ public class ProductService {
         return null;
     }
 
-    public ProductPreviewDTO saveProduct(ProductCreateDTO productCreateDTO) {
+    public ProductPreviewDTO saveProduct(ProductCreateDTO productCreateDTO, Language language) {
         Optional<Category> optionalCategory = categoryRepository.findById(productCreateDTO.getCategoryId());
         if (optionalCategory.isEmpty()) {
             return null;
@@ -60,11 +57,15 @@ public class ProductService {
         Product product = new Product();
         product.setCategory(optionalCategory.get());
         product.setSupplier(optionalSupplier.get());
-        product.setProductName(productCreateDTO.getProductName());
         product.setUnit(productCreateDTO.getUnit());
         product.setPrice(productCreateDTO.getPrice());
+        product = productRepository.save(product);
 
-        return new ProductPreviewDTO(productRepository.save(product));
+        List<ProductTranslation> translations = productCreateDTO.getProductTranslations(productCreateDTO.getTranslationDTOS(), product);
+        for (ProductTranslation translation : translations) {
+            productTranslationRepository.save(translation);
+        }
+        return new ProductPreviewDTO(productRepository.save(product),language);
     }
 
     public void deleteProduct(Long id) {
@@ -72,20 +73,36 @@ public class ProductService {
     }
 
     public boolean editProduct(ProductCreateDTO product, Long id) {
-        Optional<Product> optionalProduct = productRepository.findById(id);
-        if (optionalProduct.isPresent()) {
-            Product oldProduct = optionalProduct.get();
-            oldProduct.setProductName(product.getProductName());
-            oldProduct.setUnit(product.getUnit());
-            oldProduct.setPrice(product.getPrice());
-            productRepository.save(oldProduct);
-            return true;
-        }
+//        Optional<Product> optionalProduct = productRepository.findById(id);
+//        if (optionalProduct.isPresent()) {
+//            Product oldProduct = optionalProduct.get();
+//            oldProduct.setProductName(product.getProductName());
+//            oldProduct.setUnit(product.getUnit());
+//            oldProduct.setPrice(product.getPrice());
+//            productRepository.save(oldProduct);
+//            return true;
+//        }
         return false;
     }
+//    public boolean editCategory(CategoryCreateDTO category, Long id) {
+//        Optional<Category> optionalCategory = categoryRepository.findById(id);
+//        if (optionalCategory.isPresent()) {
+//            Category oldCategory = optionalCategory.get();
+//            oldCategory.getTranslations().forEach(translation -> {
+//                Optional<CategoryTranslationDTO> tr = category.getTranslations().stream().filter(categoryTranslationDTO ->
+//                        categoryTranslationDTO.getLanguage() == translation.getLanguage()).findFirst();
+//                if (tr.isPresent()) {
+//                    CategoryTranslationDTO translationDTO = tr.get();
+//                    translation.setCategoryName(translationDTO.getCategoryName());
+//                    translation.setDescription(translationDTO.getDescription());
+//                    categoryTranslateRepository.save(translation);
+//                }
+//            });
+//            categoryRepository.save(oldCategory);
+//            return true;
 
 
-    public ProductPreviewDTO changeProductCategoryId(Long productId, Long categoryId) {  //news 03.09.2020
+    public ProductPreviewDTO changeProductCategoryId(Long productId, Long categoryId , Language language) {  //news 03.09.2020
 
         Optional<Product> optionalProduct = productRepository.findById(productId);
         if (optionalProduct.isEmpty()) {
@@ -98,6 +115,6 @@ public class ProductService {
 
         Product product = optionalProduct.get();
         product.setCategory(optionalCategory.get());
-        return new ProductPreviewDTO(productRepository.save(product));
+        return new ProductPreviewDTO(productRepository.save(product), language);
     }
 }
