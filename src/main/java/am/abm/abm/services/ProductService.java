@@ -35,15 +35,13 @@ public class ProductService {
     public ProductDetailsDTO getProductDetails(Long id, Language language) throws EntityNotFoundException {
         Optional<Product> optionalProduct = productRepository.findById(id);
         if (optionalProduct.isPresent()) {
-            Optional<ProductTranslation> productTranslation = productTranslationRepository.findByProductAndLanguage(optionalProduct.get(), language);
-            if (productTranslation.isPresent()){
-                ProductTranslation productTranslation1 = productTranslation.get();
+            Optional<ProductTranslation> optionalProductTranslation = productTranslationRepository.findByProductAndLanguage(optionalProduct.get(), language);
+            if (optionalProductTranslation.isPresent()) {
+                ProductTranslation productTranslation = optionalProductTranslation.get();
                 return new ProductDetailsDTO(productTranslation);
             }
-            Product product = optionalProduct.get();
-            return new ProductDetailsDTO(product);
         }
-        else throw new EntityNotFoundException();
+        throw new EntityNotFoundException();
     }
 
     public List<Product> getAll() {  //inchi hamara?
@@ -85,16 +83,16 @@ public class ProductService {
         }
         return false;
     }
-    
+
 
     public ProductPreviewDTO changeProductCategoryId(Long productId, Long categoryId) {  //news 03.09.2020
 
         Optional<Product> optionalProduct = productRepository.findById(productId);
-        if (optionalProduct.isEmpty()){
+        if (optionalProduct.isEmpty()) {
             return null;
         }
         Optional<Category> optionalCategory = categoryRepository.findById(categoryId);
-        if (optionalCategory.isEmpty()){
+        if (optionalCategory.isEmpty()) {
             return null;
         }
 

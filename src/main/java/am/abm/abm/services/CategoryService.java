@@ -4,6 +4,7 @@ import am.abm.abm.exceptions.EntityNotFoundException;
 import am.abm.abm.models.dtos.category.CategoryCreateDTO;
 import am.abm.abm.models.dtos.category.CategoryDetailsDTO;
 import am.abm.abm.models.dtos.category.CategoryPreviewDto;
+import am.abm.abm.models.dtos.category.CategoryTranslationDTO;
 import am.abm.abm.models.enities.Category;
 import am.abm.abm.models.enities.CategoryTranslation;
 import am.abm.abm.models.enums.Language;
@@ -33,7 +34,7 @@ public class CategoryService {
 
     public CategoryDetailsDTO getCategoryDetails(Long id, Language language) {
         Optional<Category> optional = categoryRepository.findById(id);
-        if(optional.isPresent()) {
+        if (optional.isPresent()) {
             Optional<CategoryTranslation> translation = categoryTranslateRepository.findByCategoryAndLanguage(optional.get(), language);
             if (translation.isPresent()) {
                 CategoryTranslation categoryTranslation = translation.get();
@@ -52,7 +53,7 @@ public class CategoryService {
         Category category = new Category();
         category = categoryRepository.save(category);
         List<CategoryTranslation> translations = categoryCreateDTO.getTranslations(categoryCreateDTO.getTranslations(), category);
-        for (CategoryTranslation translation :translations) {
+        for (CategoryTranslation translation : translations) {
             categoryTranslateRepository.save(translation);
         }
         return new CategoryPreviewDto(category);
@@ -84,8 +85,16 @@ public class CategoryService {
         Optional<Category> optionalCategory = categoryRepository.findById(id);
         if (optionalCategory.isPresent()) {
             Category oldCategory = optionalCategory.get();
-            //oldCategory.setCategoryName(category.getCategoryName());
-            //oldCategory.setDescription(category.getDescription());
+            oldCategory.getTranslations().forEach(translation -> {
+                Optional<CategoryTranslationDTO> tr = category.getTranslations().stream().filter(categoryTranslationDTO ->
+                        categoryTranslationDTO.getLanguage() == translation.getLanguage()).findFirst();
+                if (tr.isPresent()) {
+                    CategoryTranslationDTO translationDTO = tr.get();
+                    translation.setCategoryName(translationDTO.getCategoryName());
+                    translation.setDescription(translationDTO.getDescription());
+                    categoryTranslateRepository.save(translation);
+                }
+            });
             categoryRepository.save(oldCategory);
             return true;
         }

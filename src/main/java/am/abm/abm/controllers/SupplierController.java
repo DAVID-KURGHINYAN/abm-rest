@@ -27,7 +27,6 @@ public class SupplierController extends BaseController {
 
     @PostMapping("add")
     public SupplierPreviewDTO addSupplier(@Valid @RequestBody SupplierCreateDTO supplier) {
-
         return supplierService.saveSupplier(supplier);
     }
 
@@ -42,7 +41,7 @@ public class SupplierController extends BaseController {
     }
 
     @GetMapping("details/{id}")
-    public ResponseModel details(@PathVariable @Min(1) Long id) {
+    public ResponseModel<SupplierPreviewDTO> details(@PathVariable @Min(1) Long id) {
         try {
             return createResult(supplierService.getSupplierDetails(id), "Supplier detail was retrieved successfully");
         } catch (EntityNotFoundException e) {

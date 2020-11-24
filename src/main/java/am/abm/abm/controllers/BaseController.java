@@ -1,5 +1,4 @@
 package am.abm.abm.controllers;
-
 import am.abm.abm.models.ResponseModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -28,8 +27,8 @@ public class BaseController {
         return responseModel;
     }
 
-    protected ResponseModel createErrorResult(Exception e) {
-        ResponseModel responseModel = new ResponseModel<>();
+    protected <R> ResponseModel<R> createErrorResult(Exception e) {
+        ResponseModel<R> responseModel = new ResponseModel<>();
         responseModel.setSuccess(false);
         List<String> errors = new ArrayList<>();
         errors.add(e.getMessage());
@@ -37,8 +36,8 @@ public class BaseController {
         return responseModel;
     }
 
-    protected ResponseModel createErrorResult(List<String> errors) {
-        ResponseModel responseModel = new ResponseModel<>();
+    protected <R> ResponseModel<R> createErrorResult(List<String> errors) {
+        ResponseModel<R> responseModel = new ResponseModel<>();
         responseModel.setSuccess(false);
         responseModel.setMessage(errors);
         return responseModel;
@@ -46,7 +45,7 @@ public class BaseController {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseModel handleValidationExceptions(MethodArgumentNotValidException ex) {
+    public <R> ResponseModel<R> handleValidationExceptions(MethodArgumentNotValidException ex) {
 
         List<String> errors = new ArrayList<>();
 

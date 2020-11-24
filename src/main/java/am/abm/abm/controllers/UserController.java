@@ -33,7 +33,7 @@ public class UserController extends BaseController {
     }
 
     @PostMapping("avatar")
-    public ResponseModel uploadUserAvatar(@RequestParam("avatar") MultipartFile avatar, @RequestParam("id") Long userId){
+    public ResponseModel<UserPreviewDTO> uploadUserAvatar(@RequestParam("avatar") MultipartFile avatar, @RequestParam("id") Long userId){
         try {
             return createResult(userService.uploadUserAvatar(avatar, userId), "User avatar was uploaded successfully");
         } catch (Exception e) {
@@ -52,7 +52,7 @@ public class UserController extends BaseController {
     }
 
     @GetMapping("details/{id}")
-    public ResponseModel details(@Valid @PathVariable @Min(1) Long id) {
+    public ResponseModel<UserPreviewDTO> details(@Valid @PathVariable @Min(1) Long id) {
         try {
             return createResult(userService.getUserDetails(id), "Product details was retrieved successfully");
         } catch (EntityNotFoundException e) {

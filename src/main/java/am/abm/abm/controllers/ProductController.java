@@ -1,11 +1,12 @@
 package am.abm.abm.controllers;
 
-
 import am.abm.abm.exceptions.EntityNotFoundException;
 import am.abm.abm.models.ResponseModel;
 import am.abm.abm.models.dtos.product.ProductCreateDTO;
+import am.abm.abm.models.dtos.product.ProductDetailsDTO;
 import am.abm.abm.models.dtos.product.ProductPreviewDTO;
 import am.abm.abm.models.enities.Product;
+import am.abm.abm.models.enums.Language;
 import am.abm.abm.services.ProductService;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,10 +46,10 @@ public class ProductController extends BaseController {
         productService.deleteProduct(id);
     }
 
-    @GetMapping("details/{id}")
-    public ResponseModel details(@PathVariable Long id) {
+    @GetMapping("details/{id}/{language}")
+    public ResponseModel<ProductDetailsDTO> details(@PathVariable Long id, @PathVariable Language language) {
         try {
-            return createResult(productService.getProductDetails(id), "Product details was retrieved successfully");
+            return createResult(productService.getProductDetails(id, language), "Product details was retrieved successfully");
         } catch (EntityNotFoundException e) {
             return createErrorResult(e);
         }

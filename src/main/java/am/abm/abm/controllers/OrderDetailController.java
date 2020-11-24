@@ -3,8 +3,6 @@ package am.abm.abm.controllers;
 import am.abm.abm.models.dtos.order.OrderDetailPreviewDTO;
 import am.abm.abm.models.dtos.orderDetail.OrderDetailCreateDTO;
 import am.abm.abm.models.dtos.orderDetail.OrderDetailDetailsDTO;
-import am.abm.abm.models.dtos.user.UserCreateDTO;
-import am.abm.abm.models.dtos.user.UserDetailsDTO;
 import am.abm.abm.models.enities.OrderDetail;
 import am.abm.abm.services.OrderDetailService;
 import org.springframework.web.bind.annotation.*;

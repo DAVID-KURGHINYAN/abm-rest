@@ -39,12 +39,11 @@ public class EmployeeController extends BaseController{
     }
 
     @GetMapping("details/{id}")
-    public ResponseModel details(@PathVariable Long id) {
+    public ResponseModel<EmployeePreviewDTO> details(@PathVariable Long id) {
         try {
             return createResult(employeeService.getEmployeeDetails(id),"Product details was retrieved successfully");
         }
-        catch (EntityNotFoundException
-                e) {
+        catch (EntityNotFoundException e) {
             return createErrorResult(e);
         }
     }

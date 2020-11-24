@@ -32,9 +32,8 @@ public class OrderController {
 
     }
 
-    @PutMapping("addOrderDate/{orderId}/{orderDate}")
+    @PutMapping("addOrderDate/{orderId}/{orderDateId}")
     public Order setOrderDateToOrder(@PathVariable Long orderId, @PathVariable Long orderDateId) {
         return orderService.setOrderDateToOrder(orderId, orderDateId);
     }
-
 }

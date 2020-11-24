@@ -1,6 +1,6 @@
 package am.abm.abm.models.enities;
 
-import lombok.Data;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,7 +23,4 @@ public class Category extends Base {
     @OneToMany(mappedBy = "category")
     private Set<CategoryTranslation> translations;
 
-
-    public void setCategoryAvatar(String write) {
-    }
 }

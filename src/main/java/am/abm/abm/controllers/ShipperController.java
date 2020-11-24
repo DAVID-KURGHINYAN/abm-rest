@@ -39,7 +39,7 @@ public class ShipperController extends BaseController{
     }
 
     @GetMapping("details/{id}")
-    public ResponseModel details(@PathVariable Long id) {
+    public ResponseModel<ShipperPreviewDTO> details(@PathVariable Long id) {
         try {
             return createResult(shipperService.getShipperDetails(id), "Product details was retrieved successfully");
         } catch (EntityNotFoundException e) {

@@ -6,15 +6,8 @@ import am.abm.abm.models.dtos.category.CategoryDetailsDTO;
 import am.abm.abm.models.dtos.category.CategoryPreviewDto;
 import am.abm.abm.models.enums.Language;
 import am.abm.abm.services.CategoryService;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.activation.FileTypeMap;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.List;
 
 @RestController
@@ -37,7 +30,7 @@ public class CategoryController extends BaseController {
     }
 
     @PostMapping("categoryAvatar")
-    public ResponseModel uploadCategoryAvatar(@RequestParam("categoryAvatar") MultipartFile categoryAvatar, @RequestParam("id") Long categoryId) {
+    public ResponseModel<CategoryPreviewDto> uploadCategoryAvatar(@RequestParam("categoryAvatar") MultipartFile categoryAvatar, @RequestParam("id") Long categoryId) {
         try {
             return createResult(categoryService.uploadCategoryAvatar(categoryAvatar, categoryId), "Category avatar was uploaded successfully");
         } catch (Exception e) {
@@ -59,5 +52,4 @@ public class CategoryController extends BaseController {
     public CategoryDetailsDTO details(@PathVariable Long id, @PathVariable Language language) {
         return categoryService.getCategoryDetails(id, language);
     }
-
 }
