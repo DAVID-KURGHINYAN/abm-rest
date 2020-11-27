@@ -2,13 +2,11 @@ package am.abm.abm.services;
 
 import am.abm.abm.exceptions.EntityNotFoundException;
 import am.abm.abm.models.dtos.employee.EmployeeCreateDTO;
-import am.abm.abm.models.dtos.employee.EmployeeDetailsDTO;
 import am.abm.abm.models.dtos.employee.EmployeePreviewDTO;
 import am.abm.abm.models.enities.Employee;
 import am.abm.abm.repositories.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 

@@ -9,7 +9,6 @@ import am.abm.abm.models.enities.Product;
 import am.abm.abm.repositories.OrderDetailRepository;
 import am.abm.abm.repositories.OrderRepository;
 import am.abm.abm.repositories.ProductRepository;
-import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

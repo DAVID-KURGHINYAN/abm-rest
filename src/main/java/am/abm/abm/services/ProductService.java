@@ -4,6 +4,7 @@ import am.abm.abm.exceptions.EntityNotFoundException;
 import am.abm.abm.models.dtos.product.ProductCreateDTO;
 import am.abm.abm.models.dtos.product.ProductDetailsDTO;
 import am.abm.abm.models.dtos.product.ProductPreviewDTO;
+import am.abm.abm.models.dtos.product.ProductTranslationDTO;
 import am.abm.abm.models.enities.*;
 import am.abm.abm.models.enums.Language;
 import am.abm.abm.repositories.CategoryRepository;
@@ -73,34 +74,24 @@ public class ProductService {
     }
 
     public boolean editProduct(ProductCreateDTO product, Long id) {
-//        Optional<Product> optionalProduct = productRepository.findById(id);
-//        if (optionalProduct.isPresent()) {
-//            Product oldProduct = optionalProduct.get();
-//            oldProduct.setProductName(product.getProductName());
-//            oldProduct.setUnit(product.getUnit());
-//            oldProduct.setPrice(product.getPrice());
-//            productRepository.save(oldProduct);
-//            return true;
-//        }
+        Optional<Product> optionalProduct = productRepository.findById(id);
+        if (optionalProduct.isPresent()) {
+            Product oldProduct = optionalProduct.get();
+            oldProduct.getTranslations().forEach(productTranslation -> {
+                Optional<ProductTranslationDTO> ptr = product.getProductTranslations().stream().filter(productTranslationDTO ->
+                        productTranslationDTO.getLanguage() == productTranslation.getLanguage()).findFirst();
+                if (ptr.isPresent()) {
+                    ProductTranslationDTO productTranslationDTO = ptr.get();
+                    productTranslation.setProductName(productTranslationDTO.getProductName());
+                    productTranslation.setDescription(productTranslationDTO.getDescription());
+                    productTranslationRepository.save(productTranslation);
+                }
+            });
+            productRepository.save(oldProduct);
+            return true;
+        }
         return false;
     }
-//    public boolean editCategory(CategoryCreateDTO category, Long id) {
-//        Optional<Category> optionalCategory = categoryRepository.findById(id);
-//        if (optionalCategory.isPresent()) {
-//            Category oldCategory = optionalCategory.get();
-//            oldCategory.getTranslations().forEach(translation -> {
-//                Optional<CategoryTranslationDTO> tr = category.getTranslations().stream().filter(categoryTranslationDTO ->
-//                        categoryTranslationDTO.getLanguage() == translation.getLanguage()).findFirst();
-//                if (tr.isPresent()) {
-//                    CategoryTranslationDTO translationDTO = tr.get();
-//                    translation.setCategoryName(translationDTO.getCategoryName());
-//                    translation.setDescription(translationDTO.getDescription());
-//                    categoryTranslateRepository.save(translation);
-//                }
-//            });
-//            categoryRepository.save(oldCategory);
-//            return true;
-
 
     public ProductPreviewDTO changeProductCategoryId(Long productId, Long categoryId , Language language) {  //news 03.09.2020
 

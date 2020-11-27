@@ -1,7 +1,11 @@
 package am.abm.abm.models.dtos.order;
 
 import am.abm.abm.models.enities.Order;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class OrderPreviewDTO {
     private long orderId;
 
@@ -9,11 +13,4 @@ public class OrderPreviewDTO {
         orderId = order.getId();
     }
 
-    public long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(long orderId) {
-        this.orderId = orderId;
-    }
 }

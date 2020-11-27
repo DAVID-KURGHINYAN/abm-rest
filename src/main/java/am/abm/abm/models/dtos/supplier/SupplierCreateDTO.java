@@ -1,5 +1,10 @@
 package am.abm.abm.models.dtos.supplier;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class SupplierCreateDTO {
     private String supplierName;
     private String contactName;
@@ -10,67 +15,4 @@ public class SupplierCreateDTO {
     private Long phone;
     private int ordersCount;
 
-    public String getSupplierName() {
-        return supplierName;
-    }
-
-    public void setSupplierName(String supplierName) {
-        this.supplierName = supplierName;
-    }
-
-    public String getContactName() {
-        return contactName;
-    }
-
-    public void setContactName(String contactName) {
-        this.contactName = contactName;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getPostalCode() {
-        return postalCode;
-    }
-
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public Long getPhone() {
-        return phone;
-    }
-
-    public void setPhone(Long phone) {
-        this.phone = phone;
-    }
-
-    public int getOrdersCount() {
-        return ordersCount;
-    }
-
-    public void setOrdersCount(int ordersCount) {
-        this.ordersCount = ordersCount;
-    }
 }

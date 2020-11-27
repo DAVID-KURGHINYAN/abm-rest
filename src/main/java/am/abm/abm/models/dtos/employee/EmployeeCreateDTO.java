@@ -1,7 +1,12 @@
 package am.abm.abm.models.dtos.employee;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.sql.Date;
 
+@Getter
+@Setter
 public class EmployeeCreateDTO {
     private String lastName;
     private String firstName;
@@ -9,43 +14,4 @@ public class EmployeeCreateDTO {
     private String photo;
     private String notes;
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
-
-    public String getNotes() {
-        return notes;
-    }
-
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
 }

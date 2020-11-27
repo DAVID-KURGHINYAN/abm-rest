@@ -1,6 +1,5 @@
 package am.abm.abm.models.dtos.product;
 
-import am.abm.abm.models.enities.Product;
 import am.abm.abm.models.enities.ProductTranslation;
 import lombok.Getter;
 import lombok.Setter;
