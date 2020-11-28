@@ -13,6 +13,7 @@ import am.abm.abm.repositories.ProductTranslationRepository;
 import am.abm.abm.repositories.SupplierRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,7 +67,7 @@ public class ProductService {
         for (ProductTranslation translation : translations) {
             productTranslationRepository.save(translation);
         }
-        return new ProductPreviewDTO(productRepository.save(product),language);
+        return new ProductPreviewDTO(productRepository.save(product),language, translations);
     }
 
     public void deleteProduct(Long id) {
@@ -78,7 +79,7 @@ public class ProductService {
         if (optionalProduct.isPresent()) {
             Product oldProduct = optionalProduct.get();
             oldProduct.getTranslations().forEach(productTranslation -> {
-                Optional<ProductTranslationDTO> ptr = product.getProductTranslations().stream().filter(productTranslationDTO ->
+                Optional<ProductTranslationDTO> ptr = product.getTranslationDTOS().stream().filter(productTranslationDTO ->
                         productTranslationDTO.getLanguage() == productTranslation.getLanguage()).findFirst();
                 if (ptr.isPresent()) {
                     ProductTranslationDTO productTranslationDTO = ptr.get();
@@ -93,19 +94,19 @@ public class ProductService {
         return false;
     }
 
-    public ProductPreviewDTO changeProductCategoryId(Long productId, Long categoryId , Language language) {  //news 03.09.2020
+    public ProductPreviewDTO changeProductCategoryId(Long productId, Long categoryId , Language language) throws EntityNotFoundException {  //news 03.09.2020
 
         Optional<Product> optionalProduct = productRepository.findById(productId);
         if (optionalProduct.isEmpty()) {
-            return null;
+            throw new EntityNotFoundException("Product was not found");
         }
         Optional<Category> optionalCategory = categoryRepository.findById(categoryId);
         if (optionalCategory.isEmpty()) {
-            return null;
+            throw new EntityNotFoundException("Category was not found");
         }
 
         Product product = optionalProduct.get();
         product.setCategory(optionalCategory.get());
-        return new ProductPreviewDTO(productRepository.save(product), language);
+        return new ProductPreviewDTO(productRepository.save(product), language, new ArrayList<>(product.getTranslations()));
     }
 }

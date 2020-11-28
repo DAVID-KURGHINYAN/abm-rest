@@ -6,6 +6,7 @@ import am.abm.abm.models.enums.Language;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -26,7 +27,7 @@ public class SupplierPreviewDTO {
         products = new HashSet<>();
 
             supplier.getProducts().forEach(item -> {
-            products.add(new ProductPreviewDTO(item, Language.EN));
+            products.add(new ProductPreviewDTO(item, Language.EN, new ArrayList<>(item.getTranslations())));
         });
     }
 

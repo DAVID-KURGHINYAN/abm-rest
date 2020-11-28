@@ -37,8 +37,12 @@ public class ProductController extends BaseController {
     }
 
     @PutMapping("change/{productId}/{categoryId}/{language}")
-    public ProductPreviewDTO changeProductCategoryId(@PathVariable Long productId, @PathVariable Long categoryId, @PathVariable Language language) {
-        return productService.changeProductCategoryId(productId, categoryId, language);
+    public ResponseModel<ProductPreviewDTO> changeProductCategoryId(@PathVariable Long productId, @PathVariable Long categoryId, @PathVariable Language language) {
+        try {
+            return createResult(productService.changeProductCategoryId(productId, categoryId, language), "Product category was changed successfully");
+        } catch (EntityNotFoundException e) {
+            return createErrorResult(e);
+        }
     }
 
     @DeleteMapping("delete/{id}")
