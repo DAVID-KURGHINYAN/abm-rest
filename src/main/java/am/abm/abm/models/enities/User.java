@@ -13,6 +13,7 @@ import java.util.Set;
 public class User extends Base {
 
     private String customerName;
+    private String password;
     private String contactName;
     private String address;
     private String city;

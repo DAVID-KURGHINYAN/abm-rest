@@ -5,6 +5,10 @@ import am.abm.abm.models.dtos.user.UserCreateDTO;
 import am.abm.abm.models.dtos.user.UserPreviewDTO;
 import am.abm.abm.models.enities.User;
 import am.abm.abm.repositories.UserRepository;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,12 +21,16 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
-@Service
-public class UserService {
-    private final UserRepository userRepository;
+import static java.util.Collections.emptyList;
 
-    public UserService(UserRepository userRepository) {
+@Service
+public class UserService implements UserDetailsService {
+    private final UserRepository userRepository;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     public UserPreviewDTO getUserDetails(Long id) throws EntityNotFoundException {
@@ -42,6 +50,7 @@ public class UserService {
         User user = new User();
         user.setAddress(userCreateDTO.getAddress());
         user.setCity(userCreateDTO.getCity());
+        user.setPassword(bCryptPasswordEncoder.encode(userCreateDTO.getPassword()));
         user.setContactName(userCreateDTO.getContactName());
         user.setCountry(userCreateDTO.getCountry());
         user.setCustomerName(userCreateDTO.getCustomerName());
@@ -85,5 +94,14 @@ public class UserService {
         String filePath = "src/main/uploads/"  + fileName;
         Files.copy(file.getInputStream(), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
         return filePath;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User applicationUser = userRepository.findByContactName(username);
+        if (applicationUser == null) {
+            throw new UsernameNotFoundException(username);
+        }
+        return new org.springframework.security.core.userdetails.User(applicationUser.getContactName(), applicationUser.getPassword(), emptyList());
     }
 }

@@ -33,5 +33,8 @@ public class UserCreateDTO {
     @Max(10)
     private String postalCode;
 
+    @NotBlank(message = "Password is required")
+    private String password;
+
 
 }
