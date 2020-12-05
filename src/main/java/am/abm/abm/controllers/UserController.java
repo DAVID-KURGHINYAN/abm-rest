@@ -28,7 +28,8 @@ public class UserController extends BaseController {
     }
 
     @PostMapping("add")
-    public UserPreviewDTO addUser(@Valid @RequestBody UserCreateDTO user) {
+    public UserPreviewDTO addUser(@Valid @RequestBody UserCreateDTO user)
+    {
         return userService.saveUser(user);
     }
 

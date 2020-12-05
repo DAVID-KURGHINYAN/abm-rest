@@ -1,6 +1,7 @@
 package am.abm.abm.models.dtos.user;
 
 import am.abm.abm.models.enities.User;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,9 +55,11 @@ public class UserPreviewDTO {
     public UserPreviewDTO(User user) {
         setUserId(user.getId());
         setAddress(user.getAddress());
-        setOrderCount(user.getOrders().size());
+        if (user.getOrders() != null)
+            setOrderCount(user.getOrders().size());
 
     }
+
     public static List<UserPreviewDTO> getUsers(List<User> users) {
         return users.stream().map(UserPreviewDTO::new).collect(Collectors.toList());
     }
